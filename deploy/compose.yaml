@@ -1,0 +1,17 @@
+name: applied-ai-public-check
+services:
+  caddy:
+    image: caddy:2.9-alpine
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./site:/srv:ro
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  portfolio:
+    image: nginx:1.27-alpine
+    expose: ["80"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]

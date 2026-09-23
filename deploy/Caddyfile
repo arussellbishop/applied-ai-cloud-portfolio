@@ -1,0 +1,4 @@
+{$PORTFOLIO_DOMAIN} {
+    root * /srv
+    file_server
+}

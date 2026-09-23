@@ -1,0 +1,19 @@
+name: security
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python scripts/validate_publication.py
+      - run: |
+          if [ -s requirements.txt ]; then
+            python -m pip install --disable-pip-version-check pip-audit
+            pip-audit --strict -r requirements.txt
+          else
+            echo 'No third-party Python requirements declared.'
+          fi
