@@ -1,0 +1,67 @@
+name: deploy-aws
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: false
+jobs:
+  ci-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Require all four CI workflows for this main commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 80); do
+            ready=true
+            for workflow in docs.yml quality.yml container.yml security.yml; do
+              result=$(gh api "repos/$REPOSITORY/actions/workflows/$workflow/runs?branch=main&event=push&head_sha=$RELEASE_SHA&per_page=10" --jq '.workflow_runs[0] | [.status, .conclusion] | @tsv')
+              case "$result" in
+                $'completed\tsuccess') ;;
+                completed*) echo "CI failed: $workflow"; exit 1 ;;
+                *) ready=false ;;
+              esac
+            done
+            if "$ready"; then exit 0; fi
+            sleep 10
+          done
+          echo 'Timed out waiting for CI'; exit 1
+  deploy:
+    needs: ci-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    steps:
+      - name: Deploy exact SHA with pinned SSH host identity
+        env:
+          DEPLOY_HOST: ${{ secrets.AWS_DEPLOY_HOST }}
+          DEPLOY_KEY: ${{ secrets.AWS_DEPLOY_KEY }}
+          KNOWN_HOSTS: ${{ secrets.AWS_KNOWN_HOSTS }}
+          RELEASE_SHA: ${{ github.sha }}
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          current=$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          if [ "$current" != "$RELEASE_SHA" ]; then echo 'Superseded release skipped'; exit 0; fi
+          umask 077
+          key_dir=$(mktemp -d)
+          trap 'rm -rf "$key_dir"' EXIT
+          printf '%s\n' "$DEPLOY_KEY" > "$key_dir/key"
+          printf '%s\n' "$KNOWN_HOSTS" > "$key_dir/known_hosts"
+          ssh -T -i "$key_dir/key" -o IdentitiesOnly=yes -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$key_dir/known_hosts" \
+            -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=40 \
+            "portfolio-deploy@$DEPLOY_HOST" "deploy $RELEASE_SHA"
+          curl --fail --silent --show-error --retry 3 "http://$DEPLOY_HOST/health" > "$key_dir/health.json"
+          jq -e --arg sha "$RELEASE_SHA" '.status == "ok" and .release == $sha' "$key_dir/health.json"
+          curl --fail --silent --show-error "http://$DEPLOY_HOST/" > "$key_dir/index.html"
+          grep -q 'Applied AI Systems' "$key_dir/index.html"

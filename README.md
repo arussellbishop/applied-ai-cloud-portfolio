@@ -12,6 +12,6 @@ A recruiter-facing portfolio about building useful AI systems with clear operati
 
 ## Local validation
 
-The repository is designed for GitHub-hosted CI. It uses simple static HTML and small Python validation scripts. CI checks documentation links, public-safe content, Python syntax, dependency metadata, and Compose configuration. No workflow deploys to production.
+The repository is designed for GitHub-hosted CI. It uses simple static HTML and small Python validation scripts. CI checks documentation links, public-safe content, Python syntax, dependency metadata, and Compose configuration. The [AWS deployment workflow](deploy/automation/README.md) deploys static portfolio content after all four CI workflows pass on main.
 
 Production activation remains a human-approved operation outside this repository's CI.
