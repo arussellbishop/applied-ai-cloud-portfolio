@@ -1,0 +1,83 @@
+{
+  "classification": "AIVOUCH_AWS_VALIDATION_PROVEN",
+  "baseline_commit": "02cba14c0e37adf6379b6ed20d15a45de3a504aa",
+  "baseline_tag": "aivouch-android-cloud-beta-v11-working",
+  "derived_validation_commit": "cb920e94407f5c348698230754ff848ff3648ec2",
+  "source_access": "Private; source and raw credentials not published",
+  "original_tests": {
+    "passed": 35,
+    "failed": 0,
+    "skipped": 0
+  },
+  "derived_tests": {
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0
+  },
+  "test_components": {
+    "backend": 30,
+    "mobile_policy": 5,
+    "additional_compatibility": 1
+  },
+  "api_checks": {
+    "health": true,
+    "readiness": true,
+    "unauthenticated_boundary": true,
+    "invalid_request": true,
+    "register": true,
+    "login": true,
+    "wrong_password": true,
+    "create_business": true,
+    "read_business": true,
+    "update_business": true,
+    "demo_scan": true,
+    "demo_only_evidence": true,
+    "dashboard": true,
+    "second_synthetic_user": true,
+    "ownership_boundary": true,
+    "unknown_route": true,
+    "restart_persisted_read": true,
+    "restart_health": true
+  },
+  "security": {
+    "NNP": true,
+    "non_root": true,
+    "cap_drop": true,
+    "read_only_root": true,
+    "seccomp": true,
+    "AppArmor": true,
+    "no_ports": true,
+    "internal_network": true,
+    "no_privileged": true,
+    "no_socket": true,
+    "memory_bounded": true,
+    "cpu_bounded": true,
+    "pids_bounded": true
+  },
+  "memory": {
+    "idle_median_mib": 88.00390625,
+    "small_request_peak_mib": 103.41015625,
+    "small_request_samples": 40,
+    "cgroup_peak_mib": 121.8984375
+  },
+  "shutdown": {
+    "elapsed_seconds": 1.1114308329997584,
+    "exit_code": 0,
+    "oom_killed": false,
+    "shutdown_complete": true
+  },
+  "application_dependency_findings": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "audit_date": "2026-09-23"
+  },
+  "os_image_audit": "Not independently performed",
+  "public_exposure": "DISABLED",
+  "cleanup": "Containers, internal network, temporary credentials and synthetic SQLite data removed",
+  "integration_limits": [
+    "Real provider APIs",
+    "Production database and billing",
+    "Signed-device testing"
+  ]
+}

@@ -1,15 +1,3 @@
 # System architecture
 
-```mermaid
-flowchart LR
-  A[Android / Termux] --> B[Private network]
-  B --> C[SSH + tmux]
-  C --> D[Codex and Git workspace]
-  D --> E[Validated Docker runtime]
-  E --> F[Caddy edge]
-  F --> G[Static portfolio]
-  F --> H[Lightweight health API]
-  E -. optional, disabled .-> I[AIVouch validation]
-```
-
-Only the edge is intended to face public HTTP. Application services stay internal and AIVouch remains disabled until separately approved.
+The [audited architecture gallery](diagrams/README.md) contains the current platform, deployment, private AIVouch validation, operating model, historical robotics/research and multi-cloud views. AIVouch validation is complete; public exposure remains disabled. Historical diagrams do not assert current reproducibility or undeployed cloud implementations.

@@ -1,0 +1,14 @@
+flowchart LR
+    FROZEN[Private frozen prototype] --> COPY[Isolated validation branch]
+    COPY --> TEST[Clean tests and dependency audits]
+    TEST --> IMAGE[Hardened bounded container]
+    subgraph PRIVATE[Temporary internal Docker network on existing AWS host]
+        IMAGE --> API[FastAPI - synthetic requests]
+        API --> DB[Disposable SQLite data]
+        API --> DEMO[Demo engines only]
+        API --> CONTROLS[Health restart and kernel-control checks]
+    end
+    CONTROLS --> EVIDENCE[Sanitized evidence and resource measurements]
+    EVIDENCE --> CLEANUP[Remove containers network credentials and test data]
+    PORTFOLIO[Existing public portfolio - untouched by this validation]
+    LIMIT[No public AIVouch route or live provider validation]

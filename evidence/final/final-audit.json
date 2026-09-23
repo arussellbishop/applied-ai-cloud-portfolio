@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-23",
+  "baseline_public_main": "5b3caf58f6c80fcf8118a2be239f2af489c0c9c9",
+  "baseline_ci_green": true,
+  "baseline_public_health": "PASS",
+  "source_privacy_scan": "PASS",
+  "sensitive_findings": 0,
+  "publication_regression_tests": {
+    "passed": 10,
+    "failed": 0
+  },
+  "local_link_and_anchor_targets": 223,
+  "diagram_source_and_embedded_checks": 16,
+  "required_architecture_views": 7,
+  "recruiter_summary_words": 212,
+  "role_evidence_rows": 24,
+  "claim_groups_audited": 18,
+  "claim_statuses": [
+    "PROVEN",
+    "PARTIALLY_PROVEN",
+    "REFERENCE_ARCHITECTURE",
+    "NOT_PUBLICLY_CLAIMABLE"
+  ],
+  "historical_experiments_rerun": false,
+  "new_infrastructure": false,
+  "public_aivouch": false,
+  "terraform_apply": false,
+  "scope": "Pre-publication candidate audit; final main/deployment acceptance is recorded separately after authorized publication."
+}

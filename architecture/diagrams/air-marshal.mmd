@@ -1,0 +1,12 @@
+flowchart LR
+    subgraph E012[Historical E012 inspected implementation and offline tests]
+        TELLO[Tello video and telemetry] --> FRAME[Single receiver and latest-frame bus]
+        FRAME --> ORB[OpenCV ORB visual odometry]
+        ORB --> ADVICE[Passive search advice - no command interface]
+        FRAME --> POLICY[Target-loss policy under offline tests]
+        POLICY --> LOG[Bounded timestamped records]
+    end
+    subgraph E013[Separate historical E013 experiment record]
+        FLIGHT[Supervised depth-scheduled following] --> EVENTS[Recorded takeoff landing and reacquisitions]
+    end
+    UNKNOWN[Not established - metric map or safe autonomous navigation]

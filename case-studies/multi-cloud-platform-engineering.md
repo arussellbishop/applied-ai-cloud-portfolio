@@ -8,7 +8,7 @@ The live AWS platform uses GitHub CI, restricted SSH deployment, a single bounde
 
 Reusable Terraform modules map that operational contract onto Lightsail, Azure VNet/NSG/Linux VM and GCP VPC/firewall/Compute Engine patterns. A shared host contract describes the runtime bootstrap boundary. Provider versions/checksums are pinned, PR CI validates all three references without cloud credentials, and offline mocked plans exercise module outputs without creating resources.
 
-Static security evidence includes visible GCP design tradeoffs: a deliberate public IP, provider-managed encryption and deferred flow logging. These are not presented as a clean security scan. The public/backend boundary and source-restricted management model are explicit; real deployment keys, account identifiers and endpoints are absent from public artifacts.
+Static security evidence retains three GCP findings: one HIGH for the intentional public IP and two LOW for flow logging and customer-managed disk keys. The HIGH is an accepted reference-design trade-off, not a false positive or proof that the design is suitable for sensitive production workloads. Static security evidence includes visible GCP design tradeoffs: a deliberate public IP, provider-managed encryption and deferred flow logging. These are not presented as a clean security scan. The public/backend boundary and source-restricted management model are explicit; real deployment keys, account identifiers and endpoints are absent from public artifacts.
 
 FinOps keeps a low-cost always-on application/control plane in AWS and heavy ML/research compute local. Azure/GCP cost components are documented without inventing live bills. No new recurring cloud infrastructure was created for this evidence.
 

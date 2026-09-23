@@ -10,14 +10,5 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: python scripts/validate_publication.py
-      - name: Validate local Markdown links
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          for path in Path('.').rglob('*.md'):
-              for target in re.findall(r'\]\(([^)#]+)', path.read_text()):
-                  if '://' not in target and not (path.parent / target).exists():
-                      raise SystemExit(f'missing link: {path} -> {target}')
-          print('local links passed')
-          PY
+      - name: Validate Markdown, HTML, anchors and site mirrors
+        run: python scripts/validate_links.py
