@@ -23,3 +23,8 @@ for name in ('aws_lightsail', 'azure_host', 'gcp_host'):
     text = (ROOT / 'terraform/modules' / name / 'variables.tf').read_text()
     assert 'endswith(cidr, "/32")' in text and 'length(var.ssh_source_cidrs) > 0' in text
 print('IaC repository guardrails passed; no apply/import/provisioner or cloud-secret workflow.')
+
+quality = (ROOT / '.github/workflows/quality.yml').read_text()
+assert 'needs: iac' in quality and 'if: always()' in quality
+assert "test '${{ needs.iac.result }}' = 'success'" in quality
+print('Required quality check fails explicitly if IaC fails; it cannot silently skip.')

@@ -7,8 +7,11 @@ jobs:
     uses: ./.github/workflows/terraform.yml
   quality:
     needs: iac
+    if: always()
     runs-on: ubuntu-latest
     steps:
+      - name: Require every IaC job to pass
+        run: test '${{ needs.iac.result }}' = 'success'
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
