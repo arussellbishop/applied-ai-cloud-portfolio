@@ -1,0 +1,14 @@
+flowchart LR
+    OP[Operator intent and scope] --> MOBILE[Android and Termux]
+    MOBILE --> ACCESS[Private access and SSH]
+    ACCESS --> SESSION[Persistent tmux workspace]
+    SESSION --> TOOLS[Codex tools and Git]
+    TOOLS --> REVIEW[Evidence tests and explicit approval]
+    REVIEW --> PUBLICATION[CI-gated publication]
+    subgraph HISTORICAL[Historical local records - partially proven]
+        DASH[Local dashboard] --> CYCLE[Central cycle and listed timers]
+        CYCLE --> RECORDS[Project and source-health records]
+        BACKUP[Recorded sample backup restore]
+    end
+    TOOLS -. separate historical system .-> DASH
+    GAP[Retry and full recovery guarantees not established]

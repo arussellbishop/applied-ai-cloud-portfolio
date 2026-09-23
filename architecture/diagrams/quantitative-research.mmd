@@ -1,0 +1,15 @@
+flowchart LR
+    subgraph HMM[Historical HMM methodology]
+        INPUT[Frozen weekly input record] --> TRAIN[Train-only preprocessing]
+        TRAIN --> INFER[Prefix-only inference]
+        INFER --> BASELINE[Comparable-window baseline review]
+    end
+    subgraph LAB[Historical Finance Lab records]
+        EXP[Experiment registry] --> TEST[Costs and multiple-testing diagnostics]
+        TEST --> REJECT[No eligible candidate - holdout untouched]
+        GAP[Source-only rebuild INVALID]
+    end
+    BASELINE --> REVIEW[Research review with limitations]
+    REJECT --> REVIEW
+    GAP --> REVIEW
+    REVIEW -. future prerequisite .-> FUTURE[Licensed input lineage and reproducible walk-forward replay]

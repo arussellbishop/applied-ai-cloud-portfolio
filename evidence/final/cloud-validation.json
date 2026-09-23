@@ -1,0 +1,49 @@
+{
+  "successful_switch": {
+    "candidate_sha": "987aa1140afdeca9fcf3bd82f39d4395a5f34bed",
+    "active_sha": "987aa1140afdeca9fcf3bd82f39d4395a5f34bed",
+    "active_slot": "blue",
+    "candidate_slot": "blue",
+    "candidate_health": "PASS",
+    "traffic_switch": "PASS",
+    "external_validation": "PASS",
+    "rollback": "NOT_REQUIRED",
+    "final_status": "SUCCESS",
+    "http_samples": 30,
+    "http_failed_samples": 0,
+    "observed_interruption_seconds": 0,
+    "observed_slots": [
+      "blue",
+      "green"
+    ],
+    "workflow_exit_code": 0
+  },
+  "unhealthy_candidate": {
+    "candidate_sha": "987aa1140afdeca9fcf3bd82f39d4395a5f34bed",
+    "active_sha": "987aa1140afdeca9fcf3bd82f39d4395a5f34bed",
+    "active_slot": "blue",
+    "candidate_slot": "green",
+    "candidate_health": "FAIL",
+    "traffic_switch": "NOT_SWITCHED",
+    "external_validation": "NOT_RUN",
+    "rollback": "NOT_REQUIRED",
+    "final_status": "FAILED",
+    "http_samples": 44,
+    "http_failed_samples": 0,
+    "observed_interruption_seconds": 0,
+    "observed_slots": [
+      "blue"
+    ],
+    "workflow_exit_code": 1
+  },
+  "measurement_scope": "Historical bounded validation, not a general zero-downtime SLA. External runner sampled about every 0.2 seconds.",
+  "successful_run": 35918554872,
+  "unhealthy_run": 35918711359,
+  "immediate_rollback": {
+    "original_sha": "e0932699002098e763b6728eef9edc773cd0bf21",
+    "rollback_sha": "e346d1dbce695013ce394ff211f2921cfe51a28a",
+    "rollback_seconds": 0.579,
+    "result": "PASS",
+    "final_sha": "e0932699002098e763b6728eef9edc773cd0bf21"
+  }
+}

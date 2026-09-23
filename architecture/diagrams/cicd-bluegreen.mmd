@@ -1,0 +1,13 @@
+flowchart TD
+    PR[Reviewed PR] --> MAIN[GitHub main SHA]
+    MAIN --> CI[Required CI including Terraform and publication checks]
+    CI --> AUTH[Restricted SSH credential and pinned host identity]
+    AUTH --> LOCK[Workflow concurrency and host lock]
+    LOCK --> INACTIVE[Prepare inactive Docker slot]
+    INACTIVE --> VERIFY{Health SHA and content pass?}
+    VERIFY -- No --> KEEP[Fail run - active traffic unchanged]
+    VERIFY -- Yes --> SWITCH[Atomic Caddy upstream switch]
+    SWITCH --> EXTERNAL{External HTTP validation passes?}
+    EXTERNAL -- Yes --> RETAIN[Success - retain previous healthy slot]
+    EXTERNAL -- No --> RESTORE[Restore previous healthy slot]
+    RESTORE --> FAIL[Verify restored health - fail run]
