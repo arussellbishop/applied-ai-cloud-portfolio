@@ -302,14 +302,14 @@ def prepare(sha, slot, unhealthy):
 
 def report(sha, **updates):
     path = BG / 'reports' / (sha + '.json')
-    value = json.loads(path.read_text()) if path.exists() else {'candidate_sha': sha}
+    value = json.loads(path.read_text()) if path.exists() and updates.get('final_status') != 'RUNNING' else {'candidate_sha': sha}
     value.update(updates)
     current = state()
     value['active_slot'] = current['active']
     value['active_sha'] = current['slots'][current['active']]['sha']
     if RESOURCES:
-        value['minimum_available_mib'] = round(RESOURCES.minimum, 1)
-        value['peak_host_used_mib'] = round(RESOURCES.peak_used, 1)
+        value['minimum_available_mib'] = round(min(value.get('minimum_available_mib', RESOURCES.minimum), RESOURCES.minimum), 1)
+        value['peak_host_used_mib'] = round(max(value.get('peak_host_used_mib', 0), RESOURCES.peak_used), 1)
     atomic_json(path, value)
     print('REPORT ' + json.dumps(value), flush=True)
     return value

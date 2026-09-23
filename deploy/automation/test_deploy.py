@@ -82,6 +82,17 @@ class DeploymentTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError,'Unsafe memory'):r.run('must-not-execute')
             process.assert_not_called()
 
+    def test_confirmation_preserves_deployment_resource_peak(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base,bg,value=self.setup_slots(directory)
+            resource=r.Resources();resource.minimum=800;resource.peak_used=1100
+            with patch.object(r,'BASE',base),patch.object(r,'BG',bg),patch.object(r,'RESOURCES',resource):
+                r.report('a'*40,final_status='RUNNING')
+                resource.minimum=1200;resource.peak_used=700
+                result=r.report('a'*40,final_status='SUCCESS')
+                self.assertEqual(result['minimum_available_mib'],800)
+                self.assertEqual(result['peak_host_used_mib'],1100)
+
     def test_crash_journal_restores_previous(self):
         with tempfile.TemporaryDirectory() as directory:
             base,bg,value=self.setup_slots(directory)
