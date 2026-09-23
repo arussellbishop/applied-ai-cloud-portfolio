@@ -1,0 +1,21 @@
+name: deployment-preparation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  approval-gate:
+    name: production approval gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate public release before any deployment
+        run: python3 scripts/validate_publication.py
+      - name: Stop before production deployment
+        run: |
+          echo "Production deployment is intentionally disabled."
+          echo "Human approval and separately configured deployment credentials are required."
+          exit 0
