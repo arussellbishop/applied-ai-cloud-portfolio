@@ -1,41 +1,28 @@
-# Portfolio deployment
+# Blue/green portfolio deployment
 
-`deploy-aws` runs on pushes to `main`. Its `ci-gate` job requires successful push runs of documentation, quality, container-config, and security for that exact commit. Required branch checks are the actual job names: `links`, `quality`, `compose`, and `scan`. The independent pull-request review requirement remains enabled.
+`deploy-aws` accepts main pushes and main-only manual dispatch. All four existing CI workflows must succeed for the exact current main SHA; the receiver repeats this gate before starting and before switching. Branch protection, production environment, secrets, strict SSH host pinning, forced-command account, and deployment concurrency remain in place.
 
-The deploy job uses the `production` environment, restricted to the `main` branch. Environment secrets are `AWS_DEPLOY_HOST`, `AWS_DEPLOY_KEY`, and `AWS_KNOWN_HOSTS`. The known-host entry comes directly from the existing host's ED25519 public key over the authenticated management connection. Strict host-key checking is mandatory; the workflow never learns a key from an unauthenticated network scan.
+The root-owned receiver maintains BLUE and GREEN records under `/opt/portfolio-deploy/bluegreen`. It starts a candidate only in the inactive slot and verifies container health, exact API SHA, exact page bytes, and the expected page marker on the private Docker network. No backend port is published. Each slot has a 96 MiB portfolio container and 128 MiB API container, no swap allowance, CPU/PID limits, read-only filesystem, dropped capabilities, and no-new-privileges. Candidate work stops below 384 MiB available host memory.
 
-The dedicated ED25519 credential authenticates as `portfolio-deploy`. Its root-owned authorized-key entry uses `restrict` and a forced command. The account has no Docker group access. Its only sudo permission runs the root-owned receiver, which accepts exactly `deploy` or `rollback` and a full lowercase commit SHA. The receiver independently verifies current main and all four CI results through GitHub's public HTTPS API. API errors, rate limits, failed checks, and stale commits fail closed. No GitHub credential is stored on the production host.
+A successful candidate becomes eligible for a single Caddy reload transaction. The existing public Caddy container is never recreated by deployment. Both API and page upstreams change in one configuration load. The prior healthy slot continues running. The startup config resides in the existing Caddy volume and is atomically replaced; a journal restores the previous healthy routing if a switch is interrupted. Caddy's admin endpoint stays on its container loopback and is reached using operator-controlled Docker exec, not a public port. See the [Caddy API transaction documentation](https://caddyserver.com/docs/api#post-load).
 
-## Release boundary
+A pre-switch failure leaves active routing unchanged and restores the prior inactive slot after removing the failed candidate. A post-switch validation failure switches back to the previous healthy slot and fails the run. Versioned candidate files and reports remain as evidence. No global image pruning runs.
 
-Only regular static files under `site/` are accepted from the exact GitHub commit archive. Traversal, links, unsupported files, and excessive sizes are rejected. Repository Dockerfiles, Python, workflows, and shell scripts are never executed by the receiver. Runtime files come from the root-owned host template at `/opt/portfolio-deploy/template`. Updating the receiver or runtime template requires a separate operator-reviewed installation; committing a new receiver does not install it.
+## Operator installation
 
-SHA-named directories and distinct image tags retain previous releases. All three existing services keep their established private network and public HTTP configuration. AIVouch remains disabled. No Docker TCP API, new AWS resource, bundle change, domain, or TLS configuration is introduced.
+Review this source and run `bootstrap_bluegreen.py` once as the host operator. It adopts the existing portfolio/API as BLUE, preserves the running Caddy container, prepares restart-safe imported configuration, and installs the restricted receiver. Routine GitHub deployments cannot install privileged source. A receiver update requires separate operator installation.
 
-GitHub concurrency serializes production jobs without cancellation. A host filesystem lock rejects overlapping deployment attempts. The receiver checks for a superseding main commit again after building and before activating containers.
+The existing SSH wrapper and sudo authorization are unchanged. The receiver accepts only a fixed release command plus a full lowercase SHA: deploy, rollback, confirm, status, or probe. Deploy and probe require successful CI for current main. Rollback and confirm reject stale active SHAs. Status exposes only deployment metadata. No interactive shell or arbitrary command is accepted.
 
-## Health and rollback
+## Live diagnostics and reporting
 
-Compose waits for container health. The receiver checks all three containers, the exact release identifier from `/health`, and byte-for-byte landing-page content. Only then does it atomically change `/opt/portfolio-deploy/current` and record `/opt/portfolio-deploy/previous`. A switch or health failure restores the previous image tags with `--no-build`, verifies their health, and exits unsuccessfully. No automatic pruning removes rollback images or directories.
+A manual main dispatch with `unhealthy_candidate=true` runs the normal inactive-slot preparation with a deliberately failing portfolio health command. It must fail before the traffic switch, restore the previous inactive slot, and leave active public service healthy. The mode cannot select arbitrary application code or an unapproved branch.
 
-The workflow additionally checks public HTTP from the GitHub-hosted runner. A failure of this external check invokes the restricted rollback command and marks the run failed. Rollback can restore only the recorded previous release, and only when the active release matches the failed SHA; it cannot undo a newer deployment. A lost SSH connection can prevent this recovery and requires operator intervention.
+GitHub's step summary reports candidate/active SHA, active/candidate slot, health, switch, external validation, rollback, final status, available memory, and sampled external HTTP interruption. A background runner probe measures public HTTP during the operation. A failed diagnostic remains a failed workflow, even when isolation behaves correctly. Summaries are native GitHub reporting; notification delivery depends on repository/account preferences and is not claimed as separately configured alert delivery.
 
-An operator can recover using the previous root-owned release:
-
-```sh
-previous=$(readlink -f /opt/portfolio-deploy/previous)
-sudo docker compose --project-name applied-ai-private --project-directory "$previous" \
-  -f "$previous/compose.yaml" -f "$previous/images.yaml" \
-  up -d --no-build --wait --wait-timeout 100 portfolio api caddy
-```
-
-After checking `/health` and the page, the operator should update the root-owned `current` symlink to that release. The restricted credential deliberately cannot select an arbitrary old release or obtain a shell.
-
-## Validation
+Run local validation with:
 
 ```sh
 python3 scripts/validate_publication.py
 python3 -m unittest discover -s deploy/automation -p 'test_*.py'
 ```
-
-Tests cover non-main rejection, failed CI rejection, archive traversal and symlink rejection, and restoration of the previous release after health failure. Production activation is established by a successful `deploy-aws` run and matching public release SHA, not by these unit tests alone.
