@@ -4,7 +4,7 @@
 
 The deploy job uses the `production` environment, restricted to the `main` branch. Environment secrets are `AWS_DEPLOY_HOST`, `AWS_DEPLOY_KEY`, and `AWS_KNOWN_HOSTS`. The known-host entry comes directly from the existing host's ED25519 public key over the authenticated management connection. Strict host-key checking is mandatory; the workflow never learns a key from an unauthenticated network scan.
 
-The dedicated ED25519 credential authenticates as `portfolio-deploy`. Its root-owned authorized-key entry uses `restrict` and a forced command. The account has no Docker group access. Its only sudo permission runs the root-owned receiver, which accepts exactly `deploy` and a full lowercase commit SHA. The receiver independently verifies current main and all four CI results through GitHub's public HTTPS API. API errors, rate limits, failed checks, and stale commits fail closed. No GitHub credential is stored on the production host.
+The dedicated ED25519 credential authenticates as `portfolio-deploy`. Its root-owned authorized-key entry uses `restrict` and a forced command. The account has no Docker group access. Its only sudo permission runs the root-owned receiver, which accepts exactly `deploy` or `rollback` and a full lowercase commit SHA. The receiver independently verifies current main and all four CI results through GitHub's public HTTPS API. API errors, rate limits, failed checks, and stale commits fail closed. No GitHub credential is stored on the production host.
 
 ## Release boundary
 
@@ -18,7 +18,7 @@ GitHub concurrency serializes production jobs without cancellation. A host files
 
 Compose waits for container health. The receiver checks all three containers, the exact release identifier from `/health`, and byte-for-byte landing-page content. Only then does it atomically change `/opt/portfolio-deploy/current` and record `/opt/portfolio-deploy/previous`. A switch or health failure restores the previous image tags with `--no-build`, verifies their health, and exits unsuccessfully. No automatic pruning removes rollback images or directories.
 
-The workflow additionally checks public HTTP from the GitHub-hosted runner. A failure of this external check marks the run failed and requires investigation; it does not blindly roll back a locally healthy service because an external network outage may be unrelated to the release.
+The workflow additionally checks public HTTP from the GitHub-hosted runner. A failure of this external check invokes the restricted rollback command and marks the run failed. Rollback can restore only the recorded previous release, and only when the active release matches the failed SHA; it cannot undo a newer deployment. A lost SSH connection can prevent this recovery and requires operator intervention.
 
 An operator can recover using the previous root-owned release:
 

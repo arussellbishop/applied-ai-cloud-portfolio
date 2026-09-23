@@ -57,11 +57,16 @@ jobs:
           trap 'rm -rf "$key_dir"' EXIT
           printf '%s\n' "$DEPLOY_KEY" > "$key_dir/key"
           printf '%s\n' "$KNOWN_HOSTS" > "$key_dir/known_hosts"
-          ssh -T -i "$key_dir/key" -o IdentitiesOnly=yes -o BatchMode=yes \
+          remote() {
+            ssh -T -i "$key_dir/key" -o IdentitiesOnly=yes -o BatchMode=yes \
             -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$key_dir/known_hosts" \
             -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=40 \
-            "portfolio-deploy@$DEPLOY_HOST" "deploy $RELEASE_SHA"
+            "portfolio-deploy@$DEPLOY_HOST" "$1 $RELEASE_SHA"
+          }
+          remote deploy
+          trap 'result=$?; trap - ERR; remote rollback || echo "ROLLBACK FAILED: operator intervention required"; exit "$result"' ERR
           curl --fail --silent --show-error --retry 3 "http://$DEPLOY_HOST/health" > "$key_dir/health.json"
           jq -e --arg sha "$RELEASE_SHA" '.status == "ok" and .release == $sha' "$key_dir/health.json"
           curl --fail --silent --show-error "http://$DEPLOY_HOST/" > "$key_dir/index.html"
           grep -q 'Applied AI Systems' "$key_dir/index.html"
+          trap - ERR

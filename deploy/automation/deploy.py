@@ -131,6 +131,19 @@ def deploy(sha):
     print('DEPLOYED ' + sha, flush=True)
 
 
+def rollback(sha):
+    current = (BASE / 'current').resolve(strict=True)
+    if current.name != sha:
+        raise ValueError('rollback rejected: active release does not match failed SHA')
+    previous = (BASE / 'previous').resolve(strict=True)
+    if previous == current:
+        raise ValueError('no distinct previous release')
+    compose(previous, 'up', '-d', '--no-build', '--wait', '--wait-timeout', '100', *SERVICES)
+    health(previous)
+    activate(previous)
+    print('ROLLBACK_OK ' + previous.name, flush=True)
+
+
 def interrupted(signum, frame):
     raise RuntimeError('deployment interrupted')
 
@@ -140,12 +153,15 @@ def main():
     signal.signal(signal.SIGHUP, interrupted)
     os.umask(0o022)
     command = sys.argv[1] if len(sys.argv) == 2 else ''
-    match = re.fullmatch(r'deploy ([0-9a-f]{40})', command)
+    match = re.fullmatch(r'(deploy|rollback) ([0-9a-f]{40})', command)
     if not match:
-        raise SystemExit('Only deploy followed by a full commit SHA is permitted')
+        raise SystemExit('Only deploy or rollback followed by a full commit SHA is permitted')
     with (BASE / 'deploy.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        deploy(match.group(1))
+        if match.group(1) == 'deploy':
+            deploy(match.group(2))
+        else:
+            rollback(match.group(2))
 
 
 if __name__ == '__main__':

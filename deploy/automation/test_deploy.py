@@ -35,6 +35,17 @@ class DeploymentTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     receiver.extract_site(stream.getvalue(), Path(directory))
 
+    def test_rollback_rejects_stale_sha(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            current = base / ('b' * 40)
+            current.mkdir()
+            (base / 'current').symlink_to(current)
+            with patch.object(receiver, 'BASE', base), patch.object(receiver, 'compose') as compose:
+                with self.assertRaises(ValueError):
+                    receiver.rollback('a' * 40)
+                compose.assert_not_called()
+
     def test_health_failure_restores_previous(self):
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory)
