@@ -8,3 +8,12 @@ secrets/
 node_modules/
 __pycache__/
 .pytest_cache/
+
+# Terraform local artifacts and sensitive state
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.tfvars.json
+crash.log

@@ -1,0 +1,28 @@
+{
+  "reviewed_on": "2026-09-23",
+  "review_by": "2026-12-23",
+  "findings": [
+    {
+      "cloud": "gcp",
+      "rule": "google-compute-no-public-ip",
+      "severity": "HIGH",
+      "file": "terraform/modules/gcp_host/main.tf",
+      "reason": "Intentional single-host HTTP ingress and explicit /32 management allowlist. A public IP is necessary for this reference without a billable load balancer/NAT. No backend ports. Not a private-only production workload."
+    },
+    {
+      "cloud": "gcp",
+      "rule": "google-compute-enable-vpc-flow-logs",
+      "severity": "LOW",
+      "file": "terraform/modules/gcp_host/main.tf",
+      "reason": "No deployment; no flow-log sink or recurring logging cost. Reassess logging/retention before production. Existing free host/application monitoring is the reference boundary."
+    },
+    {
+      "cloud": "gcp",
+      "rule": "google-compute-vm-disk-encryption-customer-key",
+      "severity": "LOW",
+      "file": "terraform/modules/gcp_host/main.tf",
+      "reason": "Use provider-managed encryption at rest. Customer-managed keys add IAM, lifecycle and potential cost obligations not justified for public static-content reference. Reassess for sensitive data."
+    }
+  ],
+  "policy": "All findings remain visible. Unreviewed findings or expired review fail CI; accepted design risks do not mean scanner-clean."
+}

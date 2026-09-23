@@ -1,0 +1,44 @@
+name: Terraform reference validation
+on:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  validate:
+    name: terraform-${{ matrix.cloud }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        cloud: [aws, azure, gcp]
+    env:
+      TF_IN_AUTOMATION: 'true'
+      TF_INPUT: 'false'
+      CHECKPOINT_DISABLE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+        with:
+          terraform_version: 1.14.7
+          terraform_wrapper: false
+      - name: Format and repository safety
+        run: |
+          terraform fmt -check -recursive terraform
+          python3 scripts/check_iac.py
+          python3 scripts/validate_publication.py
+      - name: Initialize without backend or credentials
+        run: terraform -chdir=terraform/environments/${{ matrix.cloud }} init -backend=false -input=false -lockfile=readonly
+      - name: Validate reference schema
+        run: terraform -chdir=terraform/environments/${{ matrix.cloud }} validate -no-color
+      - name: Offline mocked plan assertions
+        run: terraform -chdir=terraform/environments/${{ matrix.cloud }} test -no-color
+      - name: Static security with visible design reviews
+        run: python3 scripts/scan_iac.py --cloud '${{ matrix.cloud }}' --output iac-results
+      - name: Retain security findings
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: iac-security-${{ matrix.cloud }}
+          path: iac-results/*.json
+          retention-days: 14

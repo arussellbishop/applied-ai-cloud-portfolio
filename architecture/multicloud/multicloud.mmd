@@ -1,0 +1,25 @@
+flowchart TB
+    CI[Portable CI validation and deployment contract]
+    subgraph AWS[AWS - implemented platform / reference IaC]
+        AN[Lightsail managed networking] --> AS[Lightsail port policy]
+        AS --> AC[Small Lightsail Linux host]
+        AI[Static IPv4 / HTTP] --> AS
+    end
+    subgraph AZURE[Azure - validated reference only]
+        ZN[VNet and subnet] --> ZS[NSG HTTP and restricted SSH]
+        ZS --> ZC[Burstable Linux VM]
+        ZI[Standard public IPv4] --> ZS
+    end
+    subgraph GCP[GCP - validated reference only]
+        GN[Custom VPC and subnet] --> GS[Targeted firewall / OS Login]
+        GS --> GC[Small Compute Engine VM]
+        GI[Regional external IPv4] --> GS
+    end
+    CI -. contract .-> AC
+    CI -. contract .-> ZC
+    CI -. contract .-> GC
+    AC --> SHARED[Docker host / Caddy / private slots]
+    ZC -. bootstrap not deployed .-> SHARED
+    GC -. bootstrap not deployed .-> SHARED
+    SHARED --> MONITOR[Health endpoints / host metrics / GitHub summaries]
+    LOCAL[Local heavy-compute plane] -. separate workload placement .-> CI
