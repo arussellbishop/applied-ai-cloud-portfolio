@@ -10,8 +10,10 @@ A recruiter-facing portfolio about building useful AI systems with clear operati
 - [Quantitative Intelligence](case-studies/quantitative-intelligence.md) — reserved case-study area; claims remain limited until public source evidence is added.
 - [AWS and cloud architecture](case-studies/aws-cloud-architecture.md) — low-cost control-host design, private validation, rollback, and public activation boundaries.
 
+- [Multi-cloud platform engineering](case-studies/multi-cloud-platform-engineering.md) — AWS implemented; Azure/GCP validated reference IaC with no cloud resources created.
+
 ## Local validation
 
 The repository is designed for GitHub-hosted CI. It uses simple static HTML and small Python validation scripts. CI checks documentation links, public-safe content, Python syntax, dependency metadata, and Compose configuration. The [AWS deployment workflow](deploy/automation/README.md) deploys static portfolio content after all four CI workflows pass on main.
 
-Production activation remains a human-approved operation outside this repository's CI.
+Infrastructure activation remains outside this repository's validation workflow. The existing portfolio content deployment remains CI-gated. Terraform checks feed the existing required quality gate; no cloud credentials or apply step are used.

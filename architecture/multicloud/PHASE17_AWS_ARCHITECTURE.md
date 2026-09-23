@@ -1,0 +1,15 @@
+# Current AWS platform and reference boundary
+
+AWS = implemented/proven. A single existing Lightsail Linux host has 2 vCPU and 2 GiB RAM, with an existing attached static IPv4 (address withheld). HTTP TCP 80 reaches Caddy; no domain/HTTPS claim is made. The static-IP attachment and HTTP firewall authorization are established operator inventory. This phase does not query/change the AWS control plane or independently assert the full Lightsail firewall configuration.
+
+GitHub main must pass CI for the exact SHA. GitHub deployment secrets supply only the deployment endpoint, dedicated private deployment key and pinned host identity to the authorized job. Strict SSH host checking prevents accepting a replacement host automatically. The restricted account uses a root-owned forced-command receiver and has no general interactive deployment shell; it does not grant GitHub cloud-provider credentials or unrestricted Docker access. Existing concurrency and host locking serialize deployments.
+
+The receiver prepares the inactive BLUE/GREEN slot, validates container health, candidate SHA and content, then atomically reloads Caddy's upstream. The previous healthy slot remains available for immediate rollback. External HTTP checks can trigger a switch back. Slots have bounded memory/CPU/PIDs, non-root execution, dropped capabilities, no-new-privileges and read-only root filesystems. Only Caddy publishes a host application port. Docker's private bridge does permit outbound access; “private backend” means no host-published backend port, not an egress-isolated Docker internal network. Docker TCP API and databases are not public services.
+
+Management SSH remains separate from HTTP authentication: HTTP carries public portfolio content only. The live deployment credential restriction is an account/command boundary, not evidence of a static source-CIDR allowlist. Shared GitHub-hosted runner addresses are not inherently stable. The reference requires explicit management/runner /32 sources; achieving that operationally requires a separately reviewed runner/network design. It must not be applied as a replacement for the existing firewall.
+
+The AWS reference models a new Lightsail instance, existing public key-pair reference, bundle, static-IP attachment and HTTP/restricted-SSH ports. Lightsail abstracts its network and does not expose an EC2-style VPC/subnet/SG to this module. Terraform cannot adopt the live host's installed Docker state, root-owned receiver, network and secret management safely just by declaring a Lightsail instance. No import/ownership migration is attempted. Blueprint and bundle catalogue availability remain a pre-deployment check; schema/mock validation is not a live regional capability test.
+
+Monitoring uses GitHub summaries, Docker health, /health, landing-page HTTP, host disk, available RAM and service state. No new paid monitoring is installed. Existing management networking is untouched.
+
+See [current AWS diagram](current-aws.mmd) and [AWS provider resource](https://registry.terraform.io/providers/hashicorp/aws/6.66.0/docs/resources/lightsail_instance).

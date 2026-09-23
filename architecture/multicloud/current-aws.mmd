@@ -1,0 +1,18 @@
+flowchart LR
+    GH[GitHub main] --> CI[Exact-SHA CI gate]
+    CI --> SSH[Restricted deployment SSH]
+    SECRETS[GitHub secrets boundary] -.-> SSH
+    SSH --> RECEIVER[Root-owned command receiver]
+    subgraph HOST[Existing Lightsail - 2 vCPU / 2 GiB]
+        RECEIVER --> CANDIDATE[Inactive Docker slot]
+        CANDIDATE --> CHECK[Health and SHA validation]
+        CHECK --> SWITCH[Atomic Caddy upstream switch]
+        SWITCH --> CADDY[Caddy HTTP ingress]
+        CADDY --> ACTIVE[Active private Docker slot]
+        PREVIOUS[Previous healthy slot] -. rollback .-> SWITCH
+        ACTIVE --> HEALTH[Health and external validation]
+        HEALTH -. failure .-> PREVIOUS
+    end
+    INTERNET[Public portfolio visitors] --> IPV4[Existing static IPv4]
+    IPV4 --> CADDY
+    HEALTH --> SUMMARY[GitHub deployment summary]

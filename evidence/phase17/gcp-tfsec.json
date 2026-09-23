@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "rule_id": "AVD-GCP-0029",
+      "long_id": "google-compute-enable-vpc-flow-logs",
+      "rule_description": "VPC flow logs should be enabled for all subnetworks",
+      "rule_provider": "google",
+      "rule_service": "compute",
+      "impact": "Limited auditing capability and awareness",
+      "resolution": "Enable VPC flow logs",
+      "links": [
+        "https://aquasecurity.github.io/tfsec/v1.28.14/checks/google/compute/enable-vpc-flow-logs/",
+        "https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork#enable_flow_logs"
+      ],
+      "description": "Subnetwork does not have VPC flow logs enabled.",
+      "severity": "LOW",
+      "warning": false,
+      "status": 0,
+      "resource": "module.platform",
+      "location": {
+        "filename": "terraform/modules/gcp_host/main.tf",
+        "start_line": 29,
+        "end_line": 36
+      },
+      "review": "No deployment; no flow-log sink or recurring logging cost. Reassess logging/retention before production. Existing free host/application monitoring is the reference boundary."
+    },
+    {
+      "rule_id": "AVD-GCP-0031",
+      "long_id": "google-compute-no-public-ip",
+      "rule_description": "Instances should not have public IP addresses",
+      "rule_provider": "google",
+      "rule_service": "compute",
+      "impact": "Direct exposure of an instance to the public internet",
+      "resolution": "Remove public IP",
+      "links": [
+        "https://aquasecurity.github.io/tfsec/v1.28.14/checks/google/compute/no-public-ip/",
+        "https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance#access_config"
+      ],
+      "description": "Instance has a public IP allocated.",
+      "severity": "HIGH",
+      "warning": false,
+      "status": 0,
+      "resource": "module.platform",
+      "location": {
+        "filename": "terraform/modules/gcp_host/main.tf",
+        "start_line": 93,
+        "end_line": 96
+      },
+      "review": "Intentional single-host HTTP ingress and explicit /32 management allowlist. A public IP is necessary for this reference without a billable load balancer/NAT. No backend ports. Not a private-only production workload."
+    },
+    {
+      "rule_id": "AVD-GCP-0033",
+      "long_id": "google-compute-vm-disk-encryption-customer-key",
+      "rule_description": "VM disks should be encrypted with Customer Supplied Encryption Keys",
+      "rule_provider": "google",
+      "rule_service": "compute",
+      "impact": "Using unmanaged keys does not allow for proper management",
+      "resolution": "Use managed keys ",
+      "links": [
+        "https://aquasecurity.github.io/tfsec/v1.28.14/checks/google/compute/vm-disk-encryption-customer-key/",
+        "https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance#kms_key_self_link"
+      ],
+      "description": "Instance disk encryption does not use a customer managed key.",
+      "severity": "LOW",
+      "warning": false,
+      "status": 0,
+      "resource": "module.platform",
+      "location": {
+        "filename": "terraform/modules/gcp_host/main.tf",
+        "start_line": 84,
+        "end_line": 90
+      },
+      "review": "Use provider-managed encryption at rest. Customer-managed keys add IAM, lifecycle and potential cost obligations not justified for public static-content reference. Reassess for sensitive data."
+    }
+  ]
+}
