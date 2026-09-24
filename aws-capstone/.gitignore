@@ -1,0 +1,6 @@
+**/.terraform/
+**/*.tfstate*
+**/*.tfplan
+**/*.tfvars*
+**/bootstrap.plan
+**/__pycache__/
