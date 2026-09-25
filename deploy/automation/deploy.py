@@ -266,7 +266,8 @@ def start(record, unhealthy=False, safety=True):
     for service in SERVICES:
         port = '8080' if service == 'portfolio' else '8000'
         path = '/' if service == 'portfolio' else '/health'
-        health = f'python -c "import urllib.request; urllib.request.urlopen(\'http://127.0.0.1:{port}{path}\',timeout=2)"'
+        # Use the image's native client instead of a fresh Python HTTP import.
+        health = f'exec /bin/busybox wget -q -T 2 -O /dev/null http://127.0.0.1:{port}{path}'
         if unhealthy and service == 'portfolio':
             health = 'python -c "raise SystemExit(1)"'
         command = ['/usr/bin/docker', 'run', '-d', '--name', record['containers'][service],

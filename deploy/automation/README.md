@@ -26,3 +26,17 @@ Run local validation with:
 python3 scripts/validate_publication.py
 python3 -m unittest discover -s deploy/automation -p 'test_*.py'
 ```
+
+## Health probe under CPU pressure
+
+The Alpine application images already contain `/bin/busybox wget`. The receiver uses it to request the same loopback HTTP endpoints, consume the response, and reject connection errors, HTTP errors and stalled responses. This avoids importing Python's HTTP stack for each Docker check. The two-second request timeout, three-second Docker timeout, two-second interval, three retries and two-second start period are unchanged. Exact SHA/content checks, resource limits and the traffic-switch gate are also unchanged.
+
+CI runs `check_health_probe.py` against an isolated fixture with no network or published ports. It verifies success, HTTP 503 rejection, stalled-response timeout and refused-connection rejection using the actual command emitted by the receiver. For an existing local Alpine portfolio image, run:
+
+```sh
+python3 deploy/automation/check_health_probe.py --image YOUR_LOCAL_IMAGE
+```
+
+Use `--sudo` only when the host operator requires sudo for Docker. The fixture is removed after the check. See [diagnosis and validation](../../aws-capstone/HEALTHCHECK_RECOVERY.md).
+
+Existing containers retain their original Docker health definitions. Merging this source alone does not update the root-owned receiver or recreate those containers. After normal PR approval, install the reviewed receiver as the host operator, then repair the inactive slot first using the existing release images and unchanged security limits. Require Docker HEALTHY and exact private SHA/content checks before any routing change. Keep the current serving containers intact until the replacement passes. Use the existing atomic switch/journal mechanism and retain the previous images/state for recovery. Recreate the other slot only after the replacement is serving and public validation passes. Recheck both slots before retrying the normal main-only deployment. Do not rerun the one-time bootstrap, force a deploy, edit Docker state or relax health gates. This migration has not yet been executed.
