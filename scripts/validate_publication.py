@@ -9,7 +9,8 @@ patterns = {
     'aws-key': r'(?:AKIA|ASIA)[0-9A-Z]{16}',
     'ipv4': r'(?<![\d.])(?:\d{1,3}\.){3}\d{1,3}(?![\d.])',
     'private-mesh': r'(?i)tail' + r'scale(?:0|s+ip|s+status)',
-    'secret-assignment': r'(?i)(password|secret|token|api[_-]?key)\s*[:=]\s*(?!\s|\$\{\{)[^\s<>{}]+',
+    # GitHub's required OIDC permission is not a credential assignment.
+    'secret-assignment': r'(?i)(?<!id-)(password|secret|token|api[_-]?key)\s*[:=]\s*(?!\s|\$\{\{)[^\s<>{}]+',
 }
 # Additional final-audit categories. Report only locations, never matched values.
 patterns.update({

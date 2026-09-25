@@ -1,0 +1,28 @@
+name: aws-capstone-checks
+on:
+  push:
+    paths: ['aws-capstone/**', '.github/workflows/aws-capstone-checks.yml']
+  pull_request:
+    paths: ['aws-capstone/**', '.github/workflows/aws-capstone-checks.yml']
+permissions:
+  contents: read
+concurrency:
+  group: aws-capstone-checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+        with:
+          terraform_version: 1.14.7
+          terraform_wrapper: false
+      - run: terraform -chdir=aws-capstone/terraform/bootstrap fmt -check -recursive
+      - run: terraform -chdir=aws-capstone/terraform/bootstrap init -backend=false -input=false -lockfile=readonly
+      - run: terraform -chdir=aws-capstone/terraform/bootstrap validate -no-color
+      - run: terraform -chdir=aws-capstone/terraform/bootstrap test -no-color
+      - run: bash -n aws-capstone/cloudshell/BOOTSTRAP.sh aws-capstone/cloudshell/VERIFY.sh
+      - run: python3 -m py_compile aws-capstone/cloudshell/inventory.py
+      - run: python3 scripts/validate_publication.py
