@@ -1,0 +1,9 @@
+{
+  "classification": "AWS_CAPSTONE_COMPLETE",
+  "main_sha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+  "local": {"requests": 200, "successes": 200, "failures": 0, "routes": {"/": 100, "/health": 100}, "minimum_available_mib": 1145.96, "maximum_total_seconds": 0.010501},
+  "public": {"requests": 200, "successes": 200, "failures": 0, "routes": {"/": 100, "/health": 100}, "minimum_available_mib": 1140.71, "maximum_total_seconds": 0.007843},
+  "prior_failed_samples": {"recovered_request_level_evidence": false, "reason": "The workflow retained only aggregate counts and discarded per-request JSONL; retained deployment and proxy logs contain no matching request detail.", "treatment": "Preserved as unknown failures; not excluded or reclassified."},
+  "security_regression": "PASS",
+  "new_recurring_aws_cost_usd": 0
+}

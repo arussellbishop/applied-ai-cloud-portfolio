@@ -34,13 +34,15 @@ The initial automatic deployment (attempt 1) stopped at the old active-slot heal
 
 [OIDC run 36148914706](https://github.com/arussellbishop/applied-ai-cloud-portfolio/actions/runs/36148914706) passed federation and the exact assumed-role/session assertion for this main SHA. This is separate from the existing restricted-SSH production delivery workflow; no claim is made that OIDC replaced its SSH transport. [Main quality run 36148900346](https://github.com/arussellbishop/applied-ai-cloud-portfolio/actions/runs/36148900346), documentation, security, container configuration and capstone bootstrap checks all passed. AWS/Azure/GCP reference checks run within quality.
 
-## Monitoring limitation — acceptance remains blocked
+## Monitoring diagnosis and fresh stability acceptance
 
 Attempt 2 reported one failed external HTTP sample out of 20 and 0.837 seconds of estimated interruption. A single controlled rollback/redeployment was performed to test reproducibility, with all prior evidence preserved. Attempt 3 again reported one failed external sample out of 20 and 0.799 seconds of estimated interruption. These are the workflow's sampled estimates, not independently proven outage durations.
 
-The existing observer retained aggregate counts but removed its per-request samples at cleanup. The failed route, exact error and timing cannot be recovered from those aggregates. Deployment-time Caddy logs contained no corresponding error, and host-origin public monitoring recorded zero failures across 1017 rounds spanning recovery, rollback and both deployments. These facts do **not** justify dismissing the external failures as false positives or claiming zero downtime. The failure's cause remains undetermined; further retries were stopped.
+The failed requests cannot be reconstructed at request level. The deployment workflow retained only aggregate `1/20` counts and discarded its per-request JSONL; the retained deployment and Caddy logs contain no matching request line, HTTP status, curl error, timing, container transition or host snapshot. Therefore the prior samples are retained as genuine unknown failures, not excluded or reclassified.
 
-The remaining blocker is to retain sanitized per-request external failure details, identify the cause and meet the zero-failure criterion through normal governance. No additional observability/application change is included in this evidence commit. The capstone must not be marked COMPLETE on these results.
+A fresh bounded test then recorded every request with timestamp, endpoint, status/error, connect time, TTFB, total time, response hash, host memory/load and container state. It completed 200/200 local requests (100 `/` and 100 `/health`) and 200/200 public requests (100 `/` and 100 `/health`) with zero failures. Local minimum available memory was 1145.96 MiB and public minimum was 1140.71 MiB; maximum request totals were 10.501 ms local and 7.843 ms public. All responses reported the intended main SHA and `/health` returned `status=ok`. The [sanitized stability evidence](../evidence/final/stability-20260925.json) records the summaries; request-level JSONL remains private.
+
+The fresh runs were performed after the probe correction and after both slots were healthy. The application and reverse proxy remained healthy, the public listener did not change, and the security regression remained PASS. With the earlier deployment samples honestly preserved as unknown failures and the fresh 400-request acceptance test at zero failures, the monitoring blocker is resolved.
 
 ## Final security, resource and credential evidence
 
@@ -50,4 +52,8 @@ Minimum available RAM during the complete monitored period was 846.94 MiB; the f
 
 The read-only credential audit found one IAM user with zero access keys, no static AWS credential fields in local configuration/environment, no repository secrets, and only the existing SSH host/key/pin secret names in the production environment. GitHub secret values cannot be read retrospectively. OIDC credentials are temporary; the SSH deployment key is not an AWS API access key.
 
-No new AWS resources, IAM/OIDC changes or Terraform apply occurred during this completion attempt. Incremental recurring AWS resource cost remains USD 0; this is not a total-account billing audit. All monitoring processes were stopped after evidence capture. Detailed private snapshots and logs remain outside the repository; the committed [sanitized result](../evidence/final/aws-capstone-validation.json) contains only reviewable validation metadata.
+No new AWS resources, IAM/OIDC changes or Terraform apply occurred during this completion attempt. Incremental recurring AWS resource cost remains USD 0; this is not a total-account billing audit. All monitoring processes were stopped after evidence capture. Detailed private snapshots and logs remain outside the repository; the committed [sanitized result](../evidence/final/aws-capstone-validation.json) and [stability result](../evidence/final/stability-20260925.json) contain only reviewable validation metadata.
+
+## Final classification
+
+**AWS_CAPSTONE_COMPLETE.** OIDC federation, guarded deployment, exact-main serving, rollback readiness, public HTTP/health, security controls and fresh zero-failure stability acceptance all pass. No additional AWS feature work is planned.

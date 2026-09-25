@@ -1,5 +1,5 @@
 {
-  "classification": "AWS_CAPSTONE_DEPLOYED_MONITORING_BLOCKED",
+  "classification": "AWS_CAPSTONE_COMPLETE",
   "pr10_merge": "PASS",
   "final_main_sha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
   "main_ci": "PASS",
@@ -97,5 +97,10 @@
   "remaining_blockers": [
     "One failed external HTTP sample in each of two deployments; per-request error data was not retained, so cause and zero-failure acceptance remain unresolved."
   ],
-  "scope": "OIDC federation and existing Lightsail portfolio deployment/recovery; no new inference workload or additional AWS resources."
+  "scope": "OIDC federation and existing Lightsail portfolio deployment/recovery; no new inference workload or additional AWS resources.",
+  "monitoring_blocker": "RESOLVED_BY_FRESH_ZERO_FAILURE_STABILITY_TEST",
+  "fresh_local_requests": "200/200",
+  "fresh_public_requests": "200/200",
+  "prior_failed_samples": "UNKNOWN_REQUEST_LEVEL_EVIDENCE_UNRECOVERABLE",
+  "evidence_updated": "stability-20260925.json"
 }
