@@ -7,3 +7,8 @@ Run 36131621754 attempt 2 successfully obtained AWS credentials through OIDC, th
 A successful end-to-end workflow rerun remains pending merge through existing repository controls. No administrator bypass is authorized.
 
 Reference: https://docs.github.com/en/actions/reference/security/oidc#immutable-subject-claims
+
+
+## Final validation update — 2026-09-25
+
+The repair is merged and installed; production now serves main `d7172af2ecb25d2c8f3a700e5af4b5a043172841` with all containers healthy. OIDC, deployment, security and rollback pass. Repeated external monitoring failures leave zero-failure acceptance blocked. See [final validation](FINAL_VALIDATION.md); historical pending-review statements above are superseded by that record. The capstone is not marked COMPLETE.

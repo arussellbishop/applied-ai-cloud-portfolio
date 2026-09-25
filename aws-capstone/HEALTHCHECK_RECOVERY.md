@@ -39,3 +39,8 @@ After cleanup, 34 security/availability checks pass: only the original five cont
 Live production still uses the old probe definitions and is not yet fully Docker HEALTHY. The passing temporary candidates do not imply that production has been repaired. A source merge does not automatically install the root-owned receiver or update immutable container health definitions. Follow the operator recovery sequence in the [deployment README](../deploy/automation/README.md#health-probe-under-cpu-pressure) only after review/merge. Preserve current serving containers until a corrected private replacement is healthy and matches the expected release/content. A review gate must not be bypassed without new explicit authorization.
 
 After live repair, require both slots healthy, adequate headroom and security checks before retrying deployment. Then verify all main CI, OIDC, healthy candidate, atomic switch, exact intended main SHA, continuous public HTTP/health and retained healthy rollback. Those post-merge results are pending; this document does not claim them.
+
+
+## Final validation update — 2026-09-25
+
+The repair is merged and installed; production now serves main `d7172af2ecb25d2c8f3a700e5af4b5a043172841` with all containers healthy. OIDC, deployment, security and rollback pass. Repeated external monitoring failures leave zero-failure acceptance blocked. See [final validation](FINAL_VALIDATION.md); historical pending-review statements above are superseded by that record. The capstone is not marked COMPLETE.
