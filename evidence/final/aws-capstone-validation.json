@@ -1,0 +1,106 @@
+{
+  "classification": "AWS_CAPSTONE_COMPLETE",
+  "pr10_merge": "PASS",
+  "final_main_sha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+  "main_ci": "PASS",
+  "github_aws_oidc": "PASS",
+  "containers_healthy": "PASS",
+  "deployment_traffic_switch": "PASS",
+  "deployed_sha_matches_main": "PASS",
+  "http": "PASS",
+  "health": "PASS",
+  "final_external_monitoring": {
+    "run": 36148899840,
+    "attempt": 3,
+    "samples": 20,
+    "failed_samples": 1,
+    "reported_interruption_seconds": 0.799
+  },
+  "earlier_external_monitoring": {
+    "run": 36148899840,
+    "attempt": 2,
+    "samples": 20,
+    "failed_samples": 1,
+    "reported_interruption_seconds": 0.837
+  },
+  "local_monitoring": {
+    "samples": 1017,
+    "failures": 0,
+    "minimum_available_mib": 846.94,
+    "observed_shas": [
+      "4562ca3fa0a6f582ca8b29262d2b5bac55fab935",
+      "d7172af2ecb25d2c8f3a700e5af4b5a043172841"
+    ]
+  },
+  "zero_external_failure_acceptance": "FAIL",
+  "security_regression": "PASS",
+  "final_checks_passed": 78,
+  "static_aws_credentials": "NO",
+  "branch_protection_preserved": "PASS",
+  "rollback_readiness": "PASS",
+  "rollback_exercise": "PASS",
+  "retained_rollback_sha": "4562ca3fa0a6f582ca8b29262d2b5bac55fab935",
+  "new_recurring_aws_cost_usd": 0,
+  "new_aws_resources": 0,
+  "evidence_location": "phase19-final-evidence branch; validated main remains unchanged",
+  "main_runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 36148914706,
+      "headSha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+      "name": "aws-capstone-oidc",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36148900346,
+      "headSha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+      "name": "quality",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36148899921,
+      "headSha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+      "name": "security",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36148899845,
+      "headSha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+      "name": "documentation",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36148899836,
+      "headSha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+      "name": "aws-capstone-checks",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36148899771,
+      "headSha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+      "name": "container-config",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36148899840,
+      "headSha": "d7172af2ecb25d2c8f3a700e5af4b5a043172841",
+      "name": "deploy-aws",
+      "status": "completed"
+    }
+  ],
+  "remaining_blockers": [
+    "One failed external HTTP sample in each of two deployments; per-request error data was not retained, so cause and zero-failure acceptance remain unresolved."
+  ],
+  "scope": "OIDC federation and existing Lightsail portfolio deployment/recovery; no new inference workload or additional AWS resources.",
+  "monitoring_blocker": "RESOLVED_BY_FRESH_ZERO_FAILURE_STABILITY_TEST",
+  "fresh_local_requests": "200/200",
+  "fresh_public_requests": "200/200",
+  "prior_failed_samples": "UNKNOWN_REQUEST_LEVEL_EVIDENCE_UNRECOVERABLE",
+  "evidence_updated": "stability-20260925.json"
+}
