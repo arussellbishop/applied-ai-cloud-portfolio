@@ -26,14 +26,19 @@ jobs:
         with:
           aws-region: eu-north-1
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          mask-aws-account-id: true
           role-session-name: phase19-${{ github.run_id }}
       - name: Verify assumed identity and exact SHA
         env:
           RELEASE_SHA: ${{ github.sha }}
+          EXPECTED_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+          EXPECTED_SESSION: phase19-${{ github.run_id }}
         run: |
           set -euo pipefail
           identity=$(aws sts get-caller-identity --output json)
-          test "$(jq -r '.Arn' <<<"$identity")" = *":assumed-role/"*
+          expected_arn="${EXPECTED_ROLE_ARN/:iam:/:sts:}"
+          expected_arn="${expected_arn/:role\//:assumed-role/}/$EXPECTED_SESSION"
+          test "$(jq -r '.Arn' <<<"$identity")" = "$expected_arn"
           {
             echo '### AWS OIDC validation'
             echo
@@ -41,6 +46,6 @@ jobs:
             echo '|---|---|'
             echo '| GitHub OIDC credentials | PASS |'
             echo '| Assumed IAM role | PASS |'
-            echo "| Exact commit SHA | \\`$RELEASE_SHA\\` |"
+            printf '| Exact commit SHA | `%s` |\n' "$RELEASE_SHA"
             echo '| Application resources created | NO |'
           } >> "$GITHUB_STEP_SUMMARY"

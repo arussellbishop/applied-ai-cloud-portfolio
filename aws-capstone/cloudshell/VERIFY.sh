@@ -18,7 +18,7 @@ assert s[0]['Effect']=='Allow'
 expected=r['Arn'].rsplit(':role/',1)[0]+':oidc-provider/token.actions.githubusercontent.com'
 assert s[0]['Principal']=={'Federated':expected}
 assert s[0]['Action']=='sts:AssumeRoleWithWebIdentity'
-assert s[0]['Condition']=={'StringEquals':{'token.actions.githubusercontent.com:aud':'sts.amazonaws.com','token.actions.githubusercontent.com:sub':'repo:arussellbishop/applied-ai-cloud-portfolio:ref:refs/heads/main'}}
+assert s[0]['Condition']=={'StringEquals':{'token.actions.githubusercontent.com:aud':'sts.amazonaws.com','token.actions.githubusercontent.com:sub':'repo:arussellbishop@160221505/applied-ai-cloud-portfolio@1383937218:ref:refs/heads/main'}}
 assert not json.loads((p/'attached.json').read_text())['AttachedPolicies']
 assert json.loads((p/'inline.json').read_text())['PolicyNames']==['ai-capstone-deployment']
 print('BOOTSTRAP_SUCCESS: main-only OIDC trust; scoped policy; no managed policy attachments; Terraform drift zero')

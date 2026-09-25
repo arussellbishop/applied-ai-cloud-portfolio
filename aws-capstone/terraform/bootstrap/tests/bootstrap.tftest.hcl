@@ -19,7 +19,7 @@ run "shared_provider" {
     error_message = "Existing shared provider must not be managed."
   }
   assert {
-    condition     = jsondecode(aws_iam_role.github.assume_role_policy).Statement[0].Condition.StringEquals["token.actions.githubusercontent.com:sub"] == "repo:arussellbishop/applied-ai-cloud-portfolio:ref:refs/heads/main"
+    condition     = jsondecode(aws_iam_role.github.assume_role_policy).Statement[0].Condition.StringEquals["token.actions.githubusercontent.com:sub"] == "repo:arussellbishop@160221505/applied-ai-cloud-portfolio@1383937218:ref:refs/heads/main"
     error_message = "OIDC trust must restrict the repository and main ref."
   }
 }
