@@ -1,6 +1,6 @@
 # Applied AI & Cloud Engineering Portfolio
 
-Hands-on application validation, cloud delivery and research work, with measured evidence and explicit limits. The strongest current implementation is the AWS delivery platform and private AIVouch validation; robotics and quantitative work are presented as bounded historical research evidence.
+AI / ML engineering, platform delivery and research evidence presented with explicit maturity boundaries. The public landing page is designed for GitHub Pages; AWS engineering is complete and is not required to serve the portfolio.
 
 [![CI](https://github.com/arussellbishop/applied-ai-cloud-portfolio/actions/workflows/quality.yml/badge.svg)](https://github.com/arussellbishop/applied-ai-cloud-portfolio/actions/workflows/quality.yml)
 
@@ -12,6 +12,8 @@ Hands-on application validation, cloud delivery and research work, with measured
 - Agent-assisted operations, computer vision/autonomous-systems prototypes and quantitative ML research, with evidence maturity stated separately.
 - Cost-aware placement: a small cloud application/control plane and local heavy compute.
 
+**Target roles:** AI Engineer · Machine Learning Engineer · Agentic AI Engineer · AI Platform / MLOps Engineer · Cloud / Platform Engineer · AI / Cloud Solutions Architect
+
 ## Flagship Projects
 
 | Project / problem | Implementation and architecture | Strongest evidence | Status / limits |
@@ -21,12 +23,15 @@ Hands-on application validation, cloud delivery and research work, with measured
 | [Air Marshal](case-studies/air-marshal.md): perception and target-loss handling | Tello/Ubuntu, OpenCV ORB, latest-frame bus, supervised policy | Historical 13-test review and bounded live-follow report | Prototype evidence; no navigation-grade SLAM or new flight validation |
 | [Quantitative Intelligence](case-studies/quantitative-intelligence.md): defensible regime research | HMM, temporal controls, evaluation/rejection registries | Historical train-only/prefix-inference records and negative results | No returns claim; incomplete source-only reproduction |
 | [Cloud / Multi-Cloud Platform](case-studies/aws-cloud-architecture.md): verifiable, recoverable releases | Lightsail, Docker, Caddy, GitHub CI and Terraform references | Measured zero observed interruption; isolated unhealthy candidate; rollback evidence | Single host; HTTP only; Azure/GCP undeployed |
+| [AWS AI / Cloud Capstone](aws-capstone/FINAL_VALIDATION.md): governed cloud validation | GitHub OIDC, least privilege, exact-SHA CI, security and cost guardrails | Final sanitized validation and stability records | No new recurring capstone cost; no retained inference workload |
 
 ## Inspect the evidence
 
 [Claim audit](recruiter/FINAL_PORTFOLIO_AUDIT.md) · [Role → evidence matrix](recruiter/FINAL_ROLE_EVIDENCE_MATRIX.md) · [Recruiter summary](recruiter/FINAL_RECRUITER_SUMMARY.md) · [CV bullets](recruiter/FINAL_CV_BULLETS.md) · [Interview pack](recruiter/FINAL_INTERVIEW_PACK.md) · [Handover](recruiter/FINAL_HANDOVER.md)
 
 [Seven architecture diagrams](architecture/diagrams/README.md) · [Terraform source](terraform/README.md) · [Sanitized validation records](evidence/final/README.md) · [Multi-cloud distinctions](case-studies/multi-cloud-platform-engineering.md)
+
+[Portfolio coverage matrix](docs/PORTFOLIO_COVERAGE_MATRIX.md) · [MSc evidence](docs/MSc_AI_ML_EVIDENCE.md) · [Certifications and training](docs/CERTIFICATIONS_AND_TRAINING.md) · [Recovery manifest](docs/PORTFOLIO_RECOVERY_MANIFEST.md)
 
 ## Validation and boundaries
 
