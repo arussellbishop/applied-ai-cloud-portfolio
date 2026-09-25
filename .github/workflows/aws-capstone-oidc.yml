@@ -1,0 +1,46 @@
+name: aws-capstone-oidc
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/aws-capstone-oidc.yml'
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: aws-capstone-oidc-main
+  cancel-in-progress: false
+
+jobs:
+  authenticate:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Configure AWS credentials with GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-north-1
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          role-session-name: phase19-${{ github.run_id }}
+      - name: Verify assumed identity and exact SHA
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          identity=$(aws sts get-caller-identity --output json)
+          test "$(jq -r '.Arn' <<<"$identity")" = *":assumed-role/"*
+          {
+            echo '### AWS OIDC validation'
+            echo
+            echo '| Check | Result |'
+            echo '|---|---|'
+            echo '| GitHub OIDC credentials | PASS |'
+            echo '| Assumed IAM role | PASS |'
+            echo "| Exact commit SHA | \\`$RELEASE_SHA\\` |"
+            echo '| Application resources created | NO |'
+          } >> "$GITHUB_STEP_SUMMARY"
