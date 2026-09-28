@@ -2,7 +2,7 @@
 
 ## Final status
 
-The public portfolio is served independently through GitHub Pages. The AWS capstone implementation and validation were completed before the runtime was intentionally decommissioned as a recovery-backed FinOps decision. Historical failures remain preserved in their original evidence documents; the final 400/400 stability acceptance remains the closing validation result.
+The public portfolio is served independently through GitHub Pages. The AWS capstone implementation and validation were completed, and recovery verification authorizes the planned runtime retirement as a FinOps decision. Final AWS deletion remains pending successful AWS endpoint execution. Historical failures remain preserved in their original evidence documents; the final 400/400 stability acceptance remains the closing validation result.
 
 ## Evidence retained
 
@@ -21,4 +21,4 @@ GitHub Pages is the public presentation layer. It does not depend on the former 
 
 ## Cost and governance
 
-The portfolio runtime was retired after recovery verification to target USD 0 persistent portfolio AWS runtime cost. The non-billable GitHub OIDC control-plane material may be retained where useful. Unrelated or genuinely unowned AWS resources are not treated as portfolio deletion targets.
+The portfolio runtime is approved for retirement after recovery verification to target USD 0 persistent portfolio AWS runtime cost. The non-billable GitHub OIDC control-plane material may be retained where useful. Unrelated or genuinely unowned AWS resources are not treated as portfolio deletion targets.
