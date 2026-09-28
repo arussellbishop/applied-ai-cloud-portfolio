@@ -1,5 +1,7 @@
 # Final AWS capstone validation — 2026-09-25
 
+> **FINAL PROGRAMME STATUS — 2026-09-28:** The AWS capstone was successfully completed. GitHub OIDC, blue/green deployment, rollback evidence and the fresh 400/400 stability acceptance remain PASS. After recovery verification, the portfolio AWS runtime was intentionally decommissioned; the public portfolio now runs independently on GitHub Pages. The persistent portfolio AWS runtime cost target is USD 0. The historical validation below is retained unchanged as evidence chronology.
+
 **AWS_CAPSTONE_DEPLOYED_MONITORING_BLOCKED — not COMPLETE.** The health-probe repair is installed and the intended main release is deployed successfully. The strict zero-failed-external-samples acceptance condition is not met.
 
 | Check | Result |
