@@ -4,6 +4,12 @@
 
 This pack is the operating handbook for using the private AI governance workstation to prepare and maintain an evidence-based assessment. It supports ISO/IEC 42001 AI management-system work and related AI risk, information-security and privacy work without reproducing copyrighted standards text.
 
+## Purpose and certification boundary
+
+This pack is a practical preparation, assessment and evidence-management toolkit. It helps an organisation organise scope, risks, controls, evidence, testing, internal audit, management review and improvement activities.
+
+It is **not a certificate of compliance**, does not itself make an organisation compliant, and does not replace the applicable published standards, legal advice or competent professional judgement. Certification, where sought, requires an independent third-party certification body to assess the defined organisational scope and issue certification. The workstation may support that assessment by organising evidence, but it cannot issue certification.
+
 ## Human responsibility
 
 The workstation retrieves, organises, drafts and tests evidence. A suitably competent human must approve scope, legal interpretation, risk acceptance, control effectiveness, audit findings, management review and final client reports.
