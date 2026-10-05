@@ -1,0 +1,13 @@
+request_id,category,requested_item,why_needed,acceptable_evidence,owner,status
+REQ-001,Scope,AI system inventory and use-case description,Define assessment boundary,Inventory record and approved scope,Client AI owner,OPEN
+REQ-002,Governance,Accountable owner and RACI,Confirm responsibility and escalation,Approved appointments and RACI,Client senior owner,OPEN
+REQ-003,Data,Data-flow diagram and data categories,Assess privacy and security impact,Current diagram and data map,DPO,OPEN
+REQ-004,Legal,Legal and regulatory obligations register,Assess applicable law and guidance,Reviewed register and legal advice where needed,DPO/legal,OPEN
+REQ-005,Risk,Risk and impact assessments,Assess risk identification and treatment,Approved assessments and treatment log,Risk owner,OPEN
+REQ-006,Controls,Policies and operating procedures,Assess control design,Approved policies and procedures,Control owners,OPEN
+REQ-007,Evidence,Control operation records,Assess implementation and effectiveness,Logs approvals reviews tickets,Control owners,OPEN
+REQ-008,Testing,Model/RAG/security/fairness test results,Assess performance and harm controls,Test plans results defects,Technical owner,OPEN
+REQ-009,Human oversight,Review escalation and challenge records,Assess meaningful human control,Completed review forms and decisions,Operational owner,OPEN
+REQ-010,Suppliers,Contracts licences and supplier due diligence,Assess supply-chain risk and rights,Contracts questionnaires SBOM,Procurement,OPEN
+REQ-011,Incidents,Incident and complaint records,Assess response and improvement,Incident register and post-incident review,Security/privacy,OPEN
+REQ-012,Assurance,Internal audit and management review,Assess monitoring and continual improvement,Reports minutes action logs,Assurance owner,OPEN
