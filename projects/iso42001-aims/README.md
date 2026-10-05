@@ -24,6 +24,11 @@ It is not an ISO certificate, accredited audit, legal opinion or real client eng
 - [Evidence graph](evidence/evidence-register.csv)
 - [Standards register](references/standards-status-register.md)
 - [Free online reference library](references/free-reference-library.md)
+- [Licensed-standard verification register](references/licensed-standard-verification-register.csv)
+- [Internal audit report (HTML)](audit/internal-audit-report.html)
+- [Evaluation suite](07_EVALUATION/iso42001-evaluation-suite.jsonl)
+- [Private RAG UK personal-data case study](case-studies/private-rag-uk-personal-data.md)
+- [Recruiter brief](../../recruiter/ISO42001_RECRUITER_BRIEF.md)
 
 ## Management-system story
 
@@ -35,6 +40,7 @@ Context and scope → leadership and policy → planning and risk → support an
 python3 -m pip install -r requirements.txt
 python3 src/data_generation/generate_synthetic_data.py
 python3 src/models/train_and_evaluate.py
+python3 src/evaluation/generate_evaluation_suite.py
 python3 scripts/check_aims_portfolio.py
 pytest -q
 ```

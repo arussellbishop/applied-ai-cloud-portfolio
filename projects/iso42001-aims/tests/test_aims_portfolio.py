@@ -7,3 +7,6 @@ def test_integrity_checker():
 def test_synthetic_notice_and_no_iso_pdf():
     assert (ROOT/"DATA_SYNTHETIC_NOTICE.md").exists()
     assert not list(ROOT.rglob("*.pdf"))
+def test_evaluation_suite_size():
+    cases=(ROOT/"07_EVALUATION/iso42001-evaluation-suite.jsonl").read_text().splitlines()
+    assert len(cases) >= 50

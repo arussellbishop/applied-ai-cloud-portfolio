@@ -33,7 +33,7 @@ AI / ML engineering, platform delivery and research evidence presented with expl
 
 [Architecture diagrams](architecture/diagrams/README.md) · [Terraform source](terraform/README.md) · [Sanitized validation records](evidence/final/README.md) · [Multi-cloud distinctions](case-studies/multi-cloud-platform-engineering.md)
 
-[Portfolio coverage matrix](docs/PORTFOLIO_COVERAGE_MATRIX.md) · [MSc evidence](docs/MSc_AI_ML_EVIDENCE.md) · [Certifications and training](docs/CERTIFICATIONS_AND_TRAINING.md) · [Recovery manifest](docs/PORTFOLIO_RECOVERY_MANIFEST.md)
+[Portfolio coverage matrix](docs/PORTFOLIO_COVERAGE_MATRIX.md) · [MSc evidence](docs/MSc_AI_ML_EVIDENCE.md) · [Certifications and training](docs/CERTIFICATIONS_AND_TRAINING.md) · [Recovery manifest](docs/PORTFOLIO_RECOVERY_MANIFEST.md) · [ISO/IEC 42001 recruiter brief](recruiter/ISO42001_RECRUITER_BRIEF.md)
 
 ## Validation and boundaries
 
