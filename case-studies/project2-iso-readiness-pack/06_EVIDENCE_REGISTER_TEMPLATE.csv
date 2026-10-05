@@ -1,0 +1,2 @@
+evidence_id,control_id,artifact_type,artifact_name,location,owner,created_date,review_date,source_or_system,integrity_hash,confidentiality,reviewer,review_result,status,notes
+EVID-0001,AIGOV-GOV-001,template,AI system inventory,,,,,,INTERNAL,IN_REVIEW,OPEN,Replace with approved evidence

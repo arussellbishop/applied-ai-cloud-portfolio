@@ -1,0 +1,2 @@
+action_id,finding_id,source,description,root_cause,correction,corrective_action,owner,due_date,verification_method,effectiveness_result,status
+CAPA-0001,,INITIAL_BUILD,Replace unsupported authority labels with deterministic metadata mapping,Retrieval/model classification boundary not complete,Document defect and apply mapping,Add automated authority validation and regression tests,Assurance owner,,,OPEN

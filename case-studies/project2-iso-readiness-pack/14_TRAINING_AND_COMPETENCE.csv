@@ -1,0 +1,6 @@
+person_or_role,required_competence,training_or_assessment,evidence_date,review_date,assessor,status,notes
+AI owner,AI lifecycle governance and accountability,,,,,OPEN,
+DPO/privacy lead,UK data-protection and AI privacy assessment,,,,,OPEN,
+Security owner,RAG security prompt injection and access control,,,,,OPEN,
+Human reviewer,domain judgement challenge and escalation,,,,,OPEN,
+Assurance reviewer,internal audit evidence and findings,,,,,OPEN,

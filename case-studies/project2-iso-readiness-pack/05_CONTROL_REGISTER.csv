@@ -1,0 +1,11 @@
+control_id,control_domain,control_name,control_objective,owner,evidence_required,testing_method,status
+AIGOV-GOV-001,Governance,AI system inventory,Maintain a complete current inventory of AI systems and use cases,AI owner,Approved inventory and change history,Sample inventory against deployed systems,OPEN
+AIGOV-GOV-002,Governance,Roles and accountability,Assign accountable owners and escalation routes,Senior owner,Approved RACI and appointment records,Interview and document review,OPEN
+AIGOV-DATA-001,Data,Data governance and minimisation,Use only necessary and authorised data,DPO,Data map purpose record retention decision,Review data flows and sample access,OPEN
+AIGOV-DATA-002,Data,Source and corpus governance,Maintain provenance version status and access control for corpus content,Data owner,Manifest hashes access review change report,Reconcile index to manifest,OPEN
+AIGOV-RISK-001,Risk,AI risk and impact assessment,Identify assess treat and review AI risks,AI risk owner,Approved assessment and treatment register,Reperform scoring sample treatments,OPEN
+AIGOV-HUMAN-001,Human oversight,Human review and challenge,Keep consequential decisions under authorised human control,Decision owner,Review form escalation record approval,Sample decisions and interview owner,OPEN
+AIGOV-SEC-001,Security,Secure AI and RAG operation,Prevent unauthorised access leakage and hostile instruction execution,Security owner,Threat model access logs injection tests,Execute security test suite,OPEN
+AIGOV-MODEL-001,Model,Model lifecycle and evaluation,Control model selection change evaluation and retirement,Model owner,Model card eval results change approvals,Reproduce evaluation baseline,OPEN
+AIGOV-VENDOR-001,Suppliers,Provider and supply-chain assurance,Assess suppliers models licences and dependencies,Procurement owner,Duediligence licence SBOM contract controls,Review supplier file,OPEN
+AIGOV-ASSURE-001,Assurance,Monitoring audit and improvement,Measure performance audit controls and close findings,Assurance owner,Metrics audit reports CAPA management review,Review sampled records,OPEN

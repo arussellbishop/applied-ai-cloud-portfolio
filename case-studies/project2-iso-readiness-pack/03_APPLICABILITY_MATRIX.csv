@@ -1,0 +1,6 @@
+requirement_id,source_record,requirement_summary,applicable,reason,control_ids,evidence_ids,decision_owner,decision_date,status
+APP-001,LEG-001,Data protection obligations for personal-data processing,TO_ASSESS,Depends on purpose and processing details,AIGOV-DATA-001;AIGOV-DATA-002,,DPO,,OPEN
+APP-002,REG-001,AI accountability fairness transparency and security guidance,TO_ASSESS,Relevant where AI processes personal data,AIGOV-GOV-001;AIGOV-SEC-001,,DPO/AI owner,,OPEN
+APP-003,GOV-001,Responsible AI governance and human control,YES,Directly relevant to governance design,AIGOV-GOV-002;AIGOV-HUMAN-001,,AI owner,,OPEN
+APP-004,FRAME-001,AI risk management practices,OPTIONAL,Voluntary framework selected for crosswalk,AIGOV-RISK-001,,Risk owner,,OPEN
+APP-005,STD-001,AI management-system requirements,TO_ASSESS,Depends on certification scope and licensed standard,ALL,,Senior owner,,OPEN

@@ -1,0 +1,10 @@
+record_id,authority_type,jurisdiction,authority,title,source_url,version_or_date,status,effective_from,applicability,owner,last_verified,notes
+LEG-001,LAW,UK,UK Parliament,UK GDPR,https://www.legislation.gov.uk/eur/2016/679/contents,record current version,CURRENT,,,,Confirm current consolidated text and applicability
+LEG-002,LAW,UK,UK Parliament,Data Protection Act 2018,https://www.legislation.gov.uk/ukpga/2018/12/contents,record current revised text,CURRENT,,,,Confirm relevant provisions for the use case
+LEG-003,LAW,UK,UK Parliament,Data (Use and Access) Act 2025,https://www.legislation.gov.uk/ukpga/2025/18/contents,record commencement and amendments,UNDER_REVIEW,,,,Check commencement and effect at assessment date
+REG-001,REGULATORY_GUIDANCE,UK,ICO,AI and data protection guidance,https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/,record version and review status,CURRENT_BUT_UNDER_REVIEW,,,,Do not present guidance as legislation
+GOV-001,GOVERNMENT_GUIDANCE,UK,UK Government,AI Playbook for the UK Government,https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government,record publication and revision date,CURRENT,,,,Use as government guidance
+GOV-002,GOVERNMENT_GUIDANCE,UK,UK Government,Data and AI Ethics Framework,https://www.gov.uk/government/publications/data-ethics-framework,record version,CURRENT_VERSIONED,,,,Use as government guidance/framework material
+FRAME-001,VOLUNTARY_FRAMEWORK,INTERNATIONAL,NIST,AI Risk Management Framework,https://www.nist.gov/itl/ai-risk-management-framework,record version,CURRENT_VERSIONED,,,,Not law and not certification evidence by itself
+FRAME-002,VOLUNTARY_FRAMEWORK,INTERNATIONAL,OWASP,GenAI security guidance,https://owasp.org/www-project-top-10-for-large-language-model-applications/,record version,CURRENT_VERSIONED,,,,Use for security good practice and testing
+STD-001,FORMAL_STANDARD,INTERNATIONAL,ISO,ISO/IEC 42001,licensed copy or official catalogue reference,licensed version required,UNDER_REVIEW,,,,Do not ingest or reproduce unlicensed text
