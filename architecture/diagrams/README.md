@@ -175,3 +175,28 @@ flowchart TB
 ```
 
 [Diagram source](../multicloud/multicloud.mmd)
+
+## Private AI governance workstation
+
+Local-first governance and assurance workstation with hybrid retrieval, evidence validation and human review. Encryption and client-data use remain explicit gates.
+
+```mermaid
+flowchart TD
+    PC[Host PC hardware] --> USB[Bootable removable Linux]
+    USB --> LOCAL[Local Ollama inference]
+    USB --> EMB[Local embedding model]
+    USB --> CORPUS[Versioned authoritative corpus]
+    CORPUS --> FTS[SQLite FTS5]
+    CORPUS --> VECTOR[Local vector index]
+    FTS --> HYBRID[Hybrid retrieval and metadata filters]
+    VECTOR --> HYBRID
+    HYBRID --> VALIDATE[Evidence and citation validation]
+    VALIDATE --> LLM[Local LLM synthesis]
+    LLM --> HUMAN[Human review and approval]
+    HUMAN --> REPORT[Evidence-linked report]
+    USB --> GOVDB[Governance and assurance database]
+    GOVDB --> REPORT
+    PRIVATE[Private/client evidence] -. encrypted gate .-> USB
+```
+
+[Diagram source](private-ai-governance-workstation.mmd)
