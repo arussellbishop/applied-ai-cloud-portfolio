@@ -33,6 +33,11 @@ The workstation retrieves, organises, drafts and tests evidence. A suitably comp
 - `15_METRICS_AND_OBJECTIVES.md` - measurable objectives and monitoring;
 - `16_COMPLETION_GUIDE.md` - order of completion and evidence expectations;
 - `17_BOUNDARIES_AND_LIMITATIONS.md` - what this pack can and cannot prove.
+- `22_STANDARD_REQUIREMENTS_CROSSWALK.csv` - requirement-to-control-to-evidence mapping;
+- `23_STATUS_AND_DECISION_RULES.md` - evidence and conclusion rules;
+- `24_REQUIREMENT_COMPLETION_FORM.md` - one record per requirement;
+- `25_CROSSWALK_IMPORT.sql` - structured database tables;
+- `26_ASSESSMENT_ENGINE.md` - how the assessor and RAG work together.
 
 ## Status convention
 
