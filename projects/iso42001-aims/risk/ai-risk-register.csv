@@ -1,0 +1,9 @@
+risk_id,system_id,title,cause,event,affected_stakeholders,inherent_likelihood,inherent_impact,inherent_score,controls,residual_likelihood,residual_impact,residual_score,owner,acceptance,status
+R-001,AI-001,Subgroup disparity,Training imbalance,Support priority differs unfairly,Students and families,3,5,15,Fairness tests human review appeal route,2,3,6,ML Lead,Senior owner required,Open
+R-002,AI-001,Model drift,Attendance pattern changes,Prediction quality degrades,Students and educators,3,4,12,Drift monitoring quarterly review,2,3,6,Data Lead,Senior owner required,Open
+R-003,AI-001,Automation bias,Staff over-trust score,Human review becomes nominal,Students,3,5,15,Reviewer training challenge form sampling,2,3,6,Teaching Director,Not yet accepted,Open
+R-004,AI-002,Prompt injection,Hostile retrieved text,Model follows document instruction,Students and organisation,3,5,15,Untrusted-data boundary tests access controls,2,3,6,Security Lead,Not yet accepted,Open
+R-005,AI-002,Privacy leakage,Over-broad retrieval,Unauthorised personal information appears,Students and customers,2,5,10,Metadata filters minimisation access testing,1,4,4,DPO,Not yet accepted,Open
+R-006,AI-003,Assessment integrity,Student misuse,Generated work presented as own,Students and educators,3,4,12,Acceptable-use policy teacher review,2,3,6,Assessment Director,Not yet accepted,Open
+R-007,AI-001,Supplier change,Model version update,Performance/fairness changes unnoticed,Supplier and students,3,4,12,Change notice validation rollback,1,3,3,Procurement Lead,Not yet accepted,Open
+R-008,AI-006,Discrimination,Proxy features,Applicants disadvantaged,Applicants and employer,2,5,10,Feature review fairness testing human challenge,1,4,4,People Director,Not applicable to current pilot,Open

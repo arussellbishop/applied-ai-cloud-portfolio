@@ -1,0 +1,6 @@
+treatment_id,risk_id,treatment,action,evidence,owner,due_date,status
+T-001,R-001,Reduce,Run subgroup performance and error analysis,technical-assurance/fairness-results.csv,ML Lead,2026-11-15,Open
+T-002,R-002,Reduce,Add drift threshold and quarterly review,technical-assurance/drift-results.json,Data Lead,2026-11-30,Open
+T-003,R-003,Reduce,Train reviewers and sample override quality,governance/raci.csv;auditor workpaper,Teaching Director,2026-11-30,Open
+T-004,R-004,Reduce,Run hostile-document tests and fail closed,security/prompt-injection-test.md,Security Lead,2026-10-31,Open
+T-005,R-005,Reduce,Enforce retrieval permissions and leakage test,privacy/data-flow.md;technical-assurance, DPO,2026-11-15,Open

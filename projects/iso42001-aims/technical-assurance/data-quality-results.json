@@ -1,0 +1,8 @@
+{
+  "rows": 4000,
+  "duplicate_student_ids": 0,
+  "missing_cells": 0,
+  "attendance_out_of_range": 0,
+  "outcome_invalid": 0,
+  "status": "PASS"
+}

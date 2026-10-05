@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scenario": "deliberate distribution shift",
+  "features": [
+    {
+      "feature": "attendance",
+      "baseline_mean": 83.7913,
+      "drift_mean": 73.8297,
+      "difference": -9.9617,
+      "flag": true
+    },
+    {
+      "feature": "assessment_performance",
+      "baseline_mean": 68.0884,
+      "drift_mean": 62.9425,
+      "difference": -5.1459,
+      "flag": true
+    },
+    {
+      "feature": "engagement",
+      "baseline_mean": 3.4926,
+      "drift_mean": 2.9724,
+      "difference": -0.5202,
+      "flag": true
+    },
+    {
+      "feature": "prior_interventions",
+      "baseline_mean": 0.6867,
+      "drift_mean": 1.175,
+      "difference": 0.4883,
+      "flag": true
+    },
+    {
+      "feature": "support_need",
+      "baseline_mean": 0.1827,
+      "drift_mean": 0.2512,
+      "difference": 0.0685,
+      "flag": false
+    }
+  ],
+  "action": "investigate and trigger reassessment before relying on production decisions"
+}

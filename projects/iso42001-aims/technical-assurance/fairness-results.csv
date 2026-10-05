@@ -1,0 +1,8 @@
+attribute,group,n,selection_rate,tpr,fpr
+gender_group,group_a,1892,0.0507,0.1193,0.0302
+gender_group,group_b,1879,0.042,0.1253,0.0173
+gender_group,not_stated,229,0.0437,0.1509,0.0114
+age_band,16-17,970,0.0464,0.1111,0.0279
+age_band,18-20,1436,0.0522,0.1593,0.0191
+age_band,21-24,998,0.0401,0.0889,0.0259
+age_band,25+,596,0.0419,0.1143,0.0197

@@ -1,0 +1,25 @@
+name: ISO 42001 AIMS demonstrator
+on:
+  push:
+    paths: ["projects/iso42001-aims/**"]
+  pull_request:
+    paths: ["projects/iso42001-aims/**"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/iso42001-aims
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements.txt
+      - run: python src/data_generation/generate_synthetic_data.py
+      - run: python src/models/train_and_evaluate.py
+      - run: python src/fairness/evaluate_fairness.py
+      - run: python src/drift/evaluate_drift.py
+      - run: python src/data_quality/check_data_quality.py
+      - run: python scripts/check_aims_portfolio.py
+      - run: pytest -q

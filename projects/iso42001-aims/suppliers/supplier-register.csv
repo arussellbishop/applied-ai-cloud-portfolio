@@ -1,0 +1,3 @@
+supplier_id,name,service,system_id,owner,risk,status
+SUP-001,Fictional Model Provider,hosted language model fallback,AI-002,Procurement Lead,high,under_due_diligence
+SUP-002,Fictional Data Platform,education data platform,AI-001,Security Lead,high,under_due_diligence

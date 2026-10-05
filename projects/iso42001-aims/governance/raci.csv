@@ -1,0 +1,10 @@
+activity,senior_owner,ai_owner,system_owner,dpo,security,assurance,domain_reviewer
+Approve AIMS scope,A,R,C,C,C,C,I
+Approve use case,A,R,R,C,C,C,C
+Risk acceptance,A,R,R,C,C,C,C
+Privacy assessment,I,C,R,A,C,C,C
+Security assessment,I,C,R,C,A,C,I
+Model release,A,R,R,C,A,C,C
+Human review,I,C,R,C,I,C,A
+Internal audit,I,C,C,C,C,A,I
+Management review,A,R,C,C,C,R,I

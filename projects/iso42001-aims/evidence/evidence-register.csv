@@ -1,0 +1,6 @@
+evidence_id,artifact,system_id,risk_id,control_reference,legal_reference,audit_reference,owner,status
+EV-001,../aims/aims-scope.md,ALL,,,ISO42001-context,,-,complete
+EV-002,../ai-inventory/ai-system-inventory.csv,AI-001,R-001,AIGOV-GOV-001,UK-GDPR,DOC-AUDIT,AIMS Owner,complete
+EV-003,../technical-assurance/fairness-results.csv,AI-001,R-002,AIGOV-FAIR-001,Equality Act 2010,F-001,Technical Owner,generated
+EV-004,../technical-assurance/drift-results.json,AI-001,R-004,AIGOV-MON-001,UK-GDPR,F-001,Technical Owner,generated
+EV-005,../corrective-actions/CAPA-001.md,AI-001,R-004,AIGOV-IMPROVE-001,,F-001,AIMS Owner,open

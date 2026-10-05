@@ -1,0 +1,12 @@
+mapping_id,standard,reference,subject,verified_source,control_or_artifact,verification_status
+M-001,ISO/IEC 42001,,AIMS context leadership planning operation evaluation improvement,Licensed standard required,aims/aims-scope.md;governance;management-review,VERIFY_AGAINST_LICENSED_STANDARD
+M-002,ISO/IEC 42005:2025,,AI impact assessment lifecycle,ISO official scope page,impact-assessment/student-intervention-impact-assessment.md,Subject-level mapping
+M-003,ISO/IEC 23894:2023,,AI risk management,ISO official scope page,risk/ai-risk-register.csv,Subject-level mapping
+M-004,ISO/IEC 5338:2023,,AI lifecycle process,Licensed standard required,technical-assurance;aims,VERIFY_AGAINST_LICENSED_STANDARD
+M-005,ISO/IEC 38507:2022,,Governance implications of AI,Licensed standard required,governance/ai-governance-charter.md,VERIFY_AGAINST_LICENSED_STANDARD
+M-006,ISO 19011:2026,,Audit programme and conduct,ISO official page,audit/internal-audit-plan.md,Subject-level mapping
+M-007,ISO/IEC 27001:2022,,Information security management,Licensed standard required,security/threat-model.md,VERIFY_AGAINST_LICENSED_STANDARD
+M-008,ISO/IEC 27701:2025,,Privacy information management,ISO official page,privacy/data-flow.md,Subject-level mapping
+M-009,ISO 37301:2021,,Compliance management,Licensed standard required,legal/legal-obligations-register.csv,VERIFY_AGAINST_LICENSED_STANDARD
+M-010,ISO/IEC 5259 series,,Data quality,ISO official catalogue required,data-governance/data-quality-method.md,VERIFY_CURRENT_EDITION
+M-011,ISO/IEC TR 24027:2021,,Bias and fairness,ISO official catalogue required,technical-assurance/fairness-method.md,Subject-level mapping

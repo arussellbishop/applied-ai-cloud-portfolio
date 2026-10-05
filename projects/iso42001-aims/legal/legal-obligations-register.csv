@@ -1,0 +1,7 @@
+obligation_id,authority_type,jurisdiction,source,title,applicability,organisational_response,evidence,owner,status
+UK-DP-001,LAW,UK,UK GDPR and DPA 2018,Personal-data processing,Use-case dependent,Lawful basis transparency minimisation rights security and accountability,legal/data-protection-assessment.md,DPO,To assess
+UK-ADM-001,LAW,UK,Data (Use and Access) Act 2025,Automated significant decisions,Only if applicable to decision pathway,Assess safeguards information representations human intervention and contest,legal/automated-decision-assessment.md,DPO,To assess
+UK-REG-001,REGULATORY_GUIDANCE,UK,ICO,AI and data protection guidance,Relevant where personal data is processed,Use as regulator guidance and record review status,legal/data-protection-assessment.md,DPO,Current but under review
+UK-EQ-001,LAW,UK,Equality Act 2010,Fairness and protected-characteristic impacts,Use where service or decision may affect protected groups,Equality impact and fairness testing,impact-assessment/student-intervention-impact-assessment.md,Equality lead,To assess
+EU-AI-001,LAW,EU,Regulation (EU) 2024/1689,EU AI Act role and risk classification,Only for EU market/territorial scope,Classify role obligations and applicable controls,legal/eu-ai-act-assessment.md,Compliance lead,To assess
+STD-42001-001,VOLUNTARY_STANDARD,INTERNATIONAL,ISO/IEC 42001:2023,AI management system,Selected assessment criterion,Map verified requirements to controls and evidence,standards-crosswalks/requirements-matrix.csv,AI owner,Aligned demonstrator

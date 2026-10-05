@@ -1,0 +1,9 @@
+evidence_id,artifact,subject,status
+EV-001,../aims/aims-scope.md,scope,complete
+EV-002,../ai-inventory/ai-system-inventory.csv,inventory,complete
+EV-003,../risk/ai-risk-register.csv,risk,complete
+EV-004,../impact-assessment/student-intervention-impact-assessment.md,impact,complete
+EV-005,../technical-assurance/performance-results.json,performance,generated
+EV-006,../audit/internal-audit-report.md,audit,complete
+EV-007,../corrective-actions/CAPA-001.md,improvement,open
+EV-008,../management-review/management-review-pack.md,management_review,complete
