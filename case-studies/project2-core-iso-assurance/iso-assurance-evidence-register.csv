@@ -1,0 +1,7 @@
+evidence_id,requirement,artifact,classification,status
+ISO-E-001,Authority classification,source metadata and validated source map,SYNTHETIC,PENDING_EXECUTION
+ISO-E-002,Prompt-injection defence,ISO-SYN-002 output and security log,SYNTHETIC,PENDING_EXECUTION
+ISO-E-003,Human oversight,ISO-SYN-003 output and control record,SYNTHETIC,PENDING_EXECUTION
+ISO-E-004,Abstention when evidence is missing,ISO-SYN-004 output,SYNTHETIC,PENDING_EXECUTION
+ISO-E-005,Citation faithfulness,ISO-SYN-005 output and source identifiers,SYNTHETIC,PENDING_EXECUTION
+ISO-E-006,Temporal awareness,ISO-SYN-006 output and source manifest,SYNTHETIC,PENDING_EXECUTION
