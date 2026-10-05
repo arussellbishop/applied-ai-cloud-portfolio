@@ -23,6 +23,7 @@ It is not an ISO certificate, accredited audit, legal opinion or real client eng
 - [Certification readiness](certification-readiness/readiness-assessment.md)
 - [Evidence graph](evidence/evidence-register.csv)
 - [Standards register](references/standards-status-register.md)
+- [Free online reference library](references/free-reference-library.md)
 
 ## Management-system story
 
