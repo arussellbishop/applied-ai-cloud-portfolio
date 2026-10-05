@@ -1,0 +1,6 @@
+evidence_id,requirement,artifact,synthetic_status,review_result,owner
+SYN-E-001,System purpose and boundaries,system-inventory.md,SYNTHETIC,Pass,Teaching lead
+SYN-E-002,Documented risks,risk-register.csv,SYNTHETIC,Pass,Assurance lead
+SYN-E-003,Prompt-injection resistance,assurance-tests.jsonl,SYNTHETIC,Pending repeat test,Security lead
+SYN-E-004,Human oversight,assurance-report.md,SYNTHETIC,Pass with limitation,Teaching lead
+SYN-E-005,Privacy and data minimisation,system-inventory.md,SYNTHETIC,Pass for synthetic scope,DPO

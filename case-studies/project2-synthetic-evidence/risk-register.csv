@@ -1,0 +1,6 @@
+risk_id,title,description,likelihood,impact,treatment,owner,status
+SYN-R-001,Hallucinated explanation,Assistant produces an incorrect explanation,Medium,Medium,Require citations and teacher escalation,Teaching lead,Open
+SYN-R-002,Prompt injection,Retrieved teaching content contains instructions that attempt to alter system behaviour,Medium,High,Treat retrieved text as untrusted and run injection tests,Security lead,Open
+SYN-R-003,Unfair response,Answers may disadvantage a protected or vulnerable group,Low,High,Test representative prompts and human review,Equality lead,Open
+SYN-R-004,Assessment integrity,Students use generated content as assessed work,Medium,High,Acceptable-use policy and teacher controls,Assessment lead,Open
+SYN-R-005,Unauthorised disclosure,Personal or confidential content is included in a prompt or output,Low,High,Local-only processing, access control and data minimisation,DPO,Open
