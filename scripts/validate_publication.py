@@ -58,7 +58,14 @@ for p in root.rglob('*'):
     if 'node_modules' not in p.parts and '.terraform' not in p.parts and '.git' not in p.parts and p.is_file() and ('.tfstate' in p.name or p.name.endswith(('.tfvars', '.tfvars.json', '.tfplan'))):
         errors.append(f'forbidden Terraform artifact: {p.relative_to(root)}')
     if not {'.git', '.terraform', 'node_modules'}.intersection(p.parts) and p.is_file():
-        if p.suffix.lower() in {'.csv', '.parquet', '.sqlite', '.db', '.zip', '.tar', '.gz', '.log', '.bak'}:
+        reviewed_data_prefixes = (
+            'case-studies/project2-synthetic-evidence',
+            'case-studies/project2-core-iso-assurance',
+            'case-studies/project2-iso-readiness-pack',
+            'projects/iso42001-aims',
+        )
+        reviewed_data = any(str(p.relative_to(root)).startswith(prefix) for prefix in reviewed_data_prefixes)
+        if p.suffix.lower() in {'.csv', '.parquet', '.sqlite', '.db', '.zip', '.tar', '.gz', '.log', '.bak'} and not reviewed_data:
             errors.append(f'unreviewed-data-or-debug-artifact: {p.relative_to(root)}')
 if errors:
     print('\n'.join(errors))

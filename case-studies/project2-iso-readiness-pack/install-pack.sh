@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SRC=/home/arb1/project2-iso-readiness-pack
-USB=/mnt/ai-gov/data/opt/ai-governance/AI_GOVERNANCE
+SRC="${PROJECT2_PACK_SOURCE:?Set PROJECT2_PACK_SOURCE to the local pack directory}"
+USB="${AI_GOVERNANCE_USB_ROOT:?Set AI_GOVERNANCE_USB_ROOT to the mounted project root}"
 test -d "$SRC"
 test -d "$USB"
 install -d -m 0750 "$USB/00_ADMIN/ISO_READINESS_PACK"
