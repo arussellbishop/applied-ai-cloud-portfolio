@@ -6,8 +6,6 @@ on:
         description: Force an inactive-slot health failure; production must remain healthy
         type: boolean
         default: false
-  push:
-    branches: [main]
 permissions:
   contents: read
   actions: read
@@ -16,7 +14,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   ci-gate:
-    if: github.ref == 'refs/heads/main'
+    # AWS was decommissioned to avoid costs; retain workflow as reference only.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
